@@ -5,6 +5,7 @@ import empresasController from "./controllers/empresasController";
 import relacionamentoController from "./controllers/relacionamentoController";
 
 const routes = new Router();
+const path = require('path');
 
 // ROTA INICIAL PARA VERIFICAÇÃO DE FUNCIONALIDADE
 
@@ -21,6 +22,12 @@ routes.put('/usuarios/:idusuario', usuariosController.alterar);
 
 // ROTA PARA REALIZAR LOGIN
 routes.post('/usuarios/login', usuariosController.logar);
+
+// DEFININDO ROTA QUE SERÁ CHAMADO MEU ARQUIVO INDEX.HTML >> localhost:3333/login
+routes.get('/login', (req, res) => {
+    const loginPath = path.resolve(__dirname, '..', 'src', 'pages', 'login.html');
+    res.sendFile(loginPath);
+})
 
 // ROTAS RELACIONADAS A TABELA DE PESSOAS
 

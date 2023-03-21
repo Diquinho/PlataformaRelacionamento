@@ -62,26 +62,29 @@ export default {
     },
 
     async logar(req, res, next) {
-        const { login, senha } = req.body;
+        const { username: login, password: senha } = req.body;
+        console.log('Login: ',login);
+        console.log('Senha: ',senha);
       
         try {
           const result = await conexao.client.query(
             'SELECT * FROM cad_usuarios WHERE login = $1 and senha = $2',
             [login, senha]
-          );
-      
-          if (result.rows.length === 0) {
-            return res.status(404).send('Usuário não encontrado!');
+            );
+            console.log('Consulta SQL: ', result.rows);
+          if (result.rows.length == 0) {
+              res.status(401).json({ sucesso: false, mensagem:'Usuário não encontrado!'});
           } else {
             if (result.rows[0].login === login && result.rows[0].senha === senha) {
-              return res.status(202).send('Login realizado com sucesso!');
+              res.status(200).json({sucesso: true, mensagem: 'Login realizado com sucesso!'})
             } else {
-              return res.status(401).send('Usuário ou senha incorreta, verifique!');
+              res.status(401).json({sucesso: false, mensagem: 'Usuário ou senha incorretos, verifique!'})
             }
           }
         } catch (error) {
-          return res.status(500).send('Erro ao realizar login!');
+          res.status(500).json({sucesso: false, mensagem: 'Erro ao realizar login!'});
         }
       }
+    
       
 }
