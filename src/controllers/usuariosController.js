@@ -59,5 +59,29 @@ export default {
         } catch (error) {
             return res.status(500).send('Erro ao atualizar o usuário!');
         }
-    }
+    },
+
+    async logar(req, res, next) {
+        const { login, senha } = req.body;
+      
+        try {
+          const result = await conexao.client.query(
+            'SELECT * FROM cad_usuarios WHERE login = $1 and senha = $2',
+            [login, senha]
+          );
+      
+          if (result.rows.length === 0) {
+            return res.status(404).send('Usuário não encontrado!');
+          } else {
+            if (result.rows[0].login === login && result.rows[0].senha === senha) {
+              return res.status(202).send('Login realizado com sucesso!');
+            } else {
+              return res.status(401).send('Usuário ou senha incorreta, verifique!');
+            }
+          }
+        } catch (error) {
+          return res.status(500).send('Erro ao realizar login!');
+        }
+      }
+      
 }

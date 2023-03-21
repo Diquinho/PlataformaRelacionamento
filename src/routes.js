@@ -2,6 +2,7 @@ import { Router } from "express";
 import usuariosController from "./controllers/usuariosController";
 import pessoasController from "./controllers/pessoasController";
 import empresasController from "./controllers/empresasController";
+import relacionamentoController from "./controllers/relacionamentoController";
 
 const routes = new Router();
 
@@ -18,6 +19,9 @@ routes.get('/usuarios', usuariosController.consultar);
 routes.delete('/usuarios/:idusuario', usuariosController.delete);
 routes.put('/usuarios/:idusuario', usuariosController.alterar);
 
+// ROTA PARA REALIZAR LOGIN
+routes.post('/usuarios/login', usuariosController.logar);
+
 // ROTAS RELACIONADAS A TABELA DE PESSOAS
 
 routes.post('/pessoas', pessoasController.create);
@@ -31,6 +35,13 @@ routes.post('/empresas', empresasController.create);
 routes.get('/empresas', empresasController.consultar);
 routes.delete('/empresas/:idempresa', empresasController.delete);
 routes.put('/empresas/:idempresa', empresasController.alterar);
+
+// ROTAS RELACIONADAS A TABELA DE RELACIONAMENTOS
+
+routes.post('/relacionamentos', relacionamentoController.create);
+routes.get('/relacionamentos', relacionamentoController.consultar);
+routes.delete('/relacionamentos/:idrelacionamento', relacionamentoController.delete);
+routes.put('/relacionamentos/:idrelacionamento', relacionamentoController.alterar);
 
 
 export default routes;
