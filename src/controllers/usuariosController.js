@@ -62,7 +62,7 @@ export default {
     },
 
     async logar(req, res, next) {
-        const { username: login, password: senha } = req.body;
+        const { login, senha } = req.body;
         console.log('Login: ',login);
         console.log('Senha: ',senha);
       

@@ -1,50 +1,62 @@
-import { Router } from "express";
+//import { Router } from "express";
+const express = require('express');
+const routes = express.Router();
 import usuariosController from "./controllers/usuariosController";
 import pessoasController from "./controllers/pessoasController";
 import empresasController from "./controllers/empresasController";
 import relacionamentoController from "./controllers/relacionamentoController";
-
-const routes = new Router();
 const path = require('path');
 
-// ROTA INICIAL PARA VERIFICAÇÃO DE FUNCIONALIDADE
 
+// ROTA INICIAL PARA VERIFICAÇÃO DE FUNCIONALIDADE
 routes.get('/', (req, res) => {
     return res.json({ ok: true });
 });
 
-// ROTAS RELACIONADAS A TABELA DE USUÁRIOS
+// DEFININDO ROTAS QUE SERÃO CHAMADOS MEUS ARQUIVOS HTML. Exemplo: localhost:3333/login
+routes.get('/login', (req, res) => {
+    const loginPath = path.resolve(__dirname, '..', 'src', 'pages', 'login.html');
+    res.sendFile(loginPath);
+});
 
+routes.get('/pessoas', (req, res) => {
+    const formPath = path.resolve(__dirname, '..', 'src', 'pages', 'cadPessoas.html');
+    res.sendFile(formPath);
+})
+
+
+// ROTA ONDE É CHAMADO MEU SCRIPT.JS
+routes.get('/login/script', (req, res) => {
+    const loginPath = path.resolve(__dirname, '..', 'src', 'pages', 'script.js');
+    res.sendFile(loginPath);
+  });
+
+
+// ROTA PARA REALIZAR LOGIN
+routes.post('/usuarios/login', usuariosController.logar);
+
+// ROTA PARA CADASTRAR UMA NOVA PESSOA
+routes.post('/cadastro/pessoas', pessoasController.create);
+
+//USUARIOS
 routes.post('/usuarios', usuariosController.create);
 routes.get('/usuarios', usuariosController.consultar);
 routes.delete('/usuarios/:idusuario', usuariosController.delete);
 routes.put('/usuarios/:idusuario', usuariosController.alterar);
 
-// ROTA PARA REALIZAR LOGIN
-routes.post('/usuarios/login', usuariosController.logar);
-
-// DEFININDO ROTA QUE SERÁ CHAMADO MEU ARQUIVO INDEX.HTML >> localhost:3333/login
-routes.get('/login', (req, res) => {
-    const loginPath = path.resolve(__dirname, '..', 'src', 'pages', 'login.html');
-    res.sendFile(loginPath);
-})
-
-// ROTAS RELACIONADAS A TABELA DE PESSOAS
-
+//PESSOAS
 routes.post('/pessoas', pessoasController.create);
 routes.get('/pessoas', pessoasController.consultar);
 routes.delete('/pessoas/:idpessoa', pessoasController.delete);
 routes.put('/pessoas/:idpessoa', pessoasController.alterar);
 
-// ROTAS RELACIONAS A TABELA DE EMPRESAS
-
+//EMPRESAS
 routes.post('/empresas', empresasController.create);
 routes.get('/empresas', empresasController.consultar);
 routes.delete('/empresas/:idempresa', empresasController.delete);
 routes.put('/empresas/:idempresa', empresasController.alterar);
 
-// ROTAS RELACIONADAS A TABELA DE RELACIONAMENTOS
-
+//RELACIONAMENTO
 routes.post('/relacionamentos', relacionamentoController.create);
 routes.get('/relacionamentos', relacionamentoController.consultar);
 routes.delete('/relacionamentos/:idrelacionamento', relacionamentoController.delete);

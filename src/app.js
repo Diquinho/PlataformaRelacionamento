@@ -2,6 +2,7 @@ import express from 'express';
 import { Client } from 'pg';
 import routes from './routes';
 
+
 // Classe onde será utilizado os midlewares e rotas em outros arquivos js
 
 class App {
@@ -9,6 +10,7 @@ class App {
         this.server = express();
         this.middlewares();
         this.routes();
+        this.server.use(express.static(__dirname + '/pages'));
     }
 
     middlewares() {
