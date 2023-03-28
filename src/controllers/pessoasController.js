@@ -3,12 +3,13 @@ import conexao from "../conexao";
 
 export default {
     async create(req, res) {
-        const { nome, data_nascimento, data_cadastro, data_atualizacao, email, telefone, ativo } = req.body;
+        console.log('Chegou no INSERT')
+        const { nome, email, idempresa, telefone, data_nascimento, data_cadastro, data_atualizacao, ativo } = req.body;
 
         try {
-            const result = await conexao.client.query('INSERT INTO cad_pessoas (nome, data_nascimento, data_cadastro,'
-                + ' data_atualizacao, email, telefone, ativo) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING idpessoa',
-                [nome, data_nascimento, data_cadastro, data_atualizacao, email, telefone, ativo]);
+            const result = await conexao.client.query('INSERT INTO cad_pessoas (nome, email, idempresa,'
+                + ' telefone, data_nascimento, data_cadastro, data_atualizacao, ativo) VALUES ($1, $2, $3, $4, $5, now(), now(), true) RETURNING idpessoa',
+                [nome, email, idempresa, telefone, data_nascimento]);
 
             return res.status(201).send(`${nome} inserido com sucesso!`);
         } catch (error) {

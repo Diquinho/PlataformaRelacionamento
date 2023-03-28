@@ -20,18 +20,29 @@
             <input type="text" id="email" class="form-control" name="email"><br>
 
             <label for="label_form_pessoas" class="form-label">Telefone:</label>
-            <input type="text" id="telefone" class="form-control" name="telefone"><br>
+            <input type="number" id="telefone" class="form-control" name="telefone"><br>
 
             <label for="label_form_pessoas" class="form-label">Data nascimento</label>
-            <input type="text" id="data_nascimento" class="form-control" name="data_nascimento"><br>
+            <input type="date" id="data_nascimento" class="form-control" name="data_nascimento"><br>
 
-            <label for="label_form_pessoas" class="form-label">Empresa:</label>
-            <input type="text" id="empresa" class="form-control" name="empresa"><br>
+            <label for="label_form_pessoas" class="form-label">Empresa</label>
+            <input type="number" id="idempresa" class="form-control" name="idempresa"><br>
+            
+            
+            <label for="label_form_pessoas" class="form-label">Empresa</label>
+            <select class="form-select" aria-label="Selecione uma empresa" name="idempresa">
+                <option selected>Selecione uma empresa</option>
+                <% for (const empresa of empresas) { %>
+                <option value="<%= empresa.idempresa %>"><%= empresa.razao_social %></option>
+                <% } %>
+            </select><br>
 
-            <input type="button" class="btn btn-secondary" id="btn-cadastra-pessoa" value="Salvar">
+
+            <input type="button" class="btn btn-primary" id="btn-cadastra-pessoa" value="Salvar">
         </form>
 
     <script src="./script.js"></script>
+    <script src="../controllers/empresasController.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
    
 </body>
