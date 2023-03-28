@@ -63,13 +63,17 @@ if (btnSalvarCadastro) {
 
 
     function cadastraPessoa() {
-        console.log('Entrou no método - Cadastro de Pessoa');
         const nome = document.getElementById('nome').value;
         const email = document.getElementById('email').value;
         const telefone = document.getElementById('telefone').value;
         const data_nascimento = document.getElementById('data_nascimento').value;
         const idempresa = document.getElementById('idempresa').value;
 
+        if (!nome || !email || !telefone || !idempresa) {
+            alert('Preencha todos os campos!');
+            return
+        }
+        
         const requestOptions = {
             method: 'POST',
             redirect: 'follow',
