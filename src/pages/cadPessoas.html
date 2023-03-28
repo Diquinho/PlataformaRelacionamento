@@ -25,17 +25,9 @@
             <label for="label_form_pessoas" class="form-label">Data nascimento</label>
             <input type="date" id="data_nascimento" class="form-control" name="data_nascimento"><br>
 
-            <label for="label_form_pessoas" class="form-label">Empresa</label>
-            <input type="number" id="idempresa" class="form-control" name="idempresa"><br>
-            
-            
-            <label for="label_form_pessoas" class="form-label">Empresa</label>
-            <select class="form-select" aria-label="Selecione uma empresa" name="idempresa">
-                <option selected>Selecione uma empresa</option>
-                <% for (const empresa of empresas) { %>
-                <option value="<%= empresa.idempresa %>"><%= empresa.razao_social %></option>
-                <% } %>
-            </select><br>
+            <!-- <label for="label_form_pessoas" class="form-label">Empresa</label>
+            <input type="number" id="idempresa" class="form-control" name="idempresa"><br> -->
+          
 
 
             <input type="button" class="btn btn-primary" id="btn-cadastra-pessoa" value="Salvar">

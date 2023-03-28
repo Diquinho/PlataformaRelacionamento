@@ -11,6 +11,9 @@ class App {
         this.middlewares();
         this.routes();
         this.server.use(express.static(__dirname + '/pages'));
+        this.server.use('/controllers', express.static(__dirname + '/controllers'));
+        this.server.use('/css', express.static(__dirname + '/css'));
+
     }
 
     middlewares() {
