@@ -7,11 +7,13 @@ import empresasController from "./controllers/empresasController";
 import relacionamentoController from "./controllers/relacionamentoController";
 const path = require('path');
 
+// ==================================== ROTA INICIAL DE TESTE ========================================
 
-// ROTA INICIAL PARA VERIFICAÇÃO DE FUNCIONALIDADE
 routes.get('/', (req, res) => {
     return res.json({ ok: true });
 });
+
+//==================================== ROTA DE PÁGINAS HTML ========================================
 
 // DEFININDO ROTAS QUE SERÃO CHAMADOS MEUS ARQUIVOS HTML. Exemplo: localhost:3333/login
 routes.get('/login', (req, res) => {
@@ -24,6 +26,10 @@ routes.get('/pessoas', (req, res) => {
     res.sendFile(formPath);
 })
 
+routes.get('/empresas', (req, res) => {
+    const formPath = path.resolve(__dirname, '..', 'src', 'pages', 'cadEmpresas.html');
+    res.sendFile(formPath);
+})
 
 // ROTA ONDE É CHAMADO MEU SCRIPT.JS
 routes.get('/login/script', (req, res) => {
@@ -31,12 +37,15 @@ routes.get('/login/script', (req, res) => {
     res.sendFile(loginPath);
   });
 
-
+//==================================== ROTA DE API RESTFULL ========================================
 // ROTA PARA REALIZAR LOGIN
 routes.post('/usuarios/login', usuariosController.logar);
 
 // ROTA PARA CADASTRAR UMA NOVA PESSOA
 routes.post('/cadastro/pessoas', pessoasController.create);
+
+// ROTA PARA CADASTRAR UMA NOVA EMPRESA
+routes.post('/cadastro/empresas', empresasController.create);
 
 //USUARIOS
 routes.post('/usuarios', usuariosController.create);

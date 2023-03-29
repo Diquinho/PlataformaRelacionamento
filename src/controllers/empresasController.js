@@ -2,12 +2,13 @@ import conexao from "../conexao";
 
 export default {
     async create(req, res) {
-        const { razao_social, idpessoa_responsavel, idtipo_empresa, data_cadastro, tipo, ativo } = req.body;
+        console.log('Chegou no INSERT de Empresas!')
+        const { razao_social, nome_fantasia, cnpj, idtipo_empresa, data_cadastro, ativo } = req.body;
 
         try {
-            const result = await conexao.client.query('INSERT INTO cad_empresas (razao_social, idpessoa_responsavel, idtipo_empresa,'
-                + ' data_cadastro, tipo, ativo) VALUES ($1, $2, $3, $4, $5, $6) RETURNING idempresa',
-                [razao_social, idpessoa_responsavel, idtipo_empresa, data_cadastro, tipo, ativo]);
+            const result = await conexao.client.query('INSERT INTO cad_empresas (razao_social, nome_fantasia, cnpj,'
+                + ' idtipo_empresa, data_cadastro, ativo) VALUES ($1, $2, $3, $4, now(), true) RETURNING idempresa',
+                [razao_social, nome_fantasia, cnpj, idtipo_empresa]);
 
             return res.status(201).send(`Cadastro da empresa ${razao_social} realizado com sucesso!!`);
         } catch (error) {

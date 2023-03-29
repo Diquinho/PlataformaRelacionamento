@@ -20,6 +20,15 @@ if (btnSalvarCadastro) {
 });
 }
 
+const btnSalvarCadastroEmpresa = document.getElementById('btn-cadastra-empresa');
+
+if (btnSalvarCadastroEmpresa) {
+    btnSalvarCadastroEmpresa.addEventListener('click', function (event) {
+        event.preventDefault();
+        cadastraEmpresa();
+    })
+}
+
     // ================== FUNÇÕES ===============
 
     function fazerLogin() {
@@ -93,6 +102,50 @@ if (btnSalvarCadastro) {
         console.log(data_nascimento);
 
         fetch('/cadastro/pessoas', requestOptions).then(response => {
+            response.json().then(data => {
+                if (data.sucesso) {
+                    // Se o cadastro for realizado com sucesso, ele retorna para a página de listagem
+                    window.location.href = '/lista_pessoas.html';
+                } else {
+                    // Cadastro falhou, enviando mensagem de erro
+                    alert(data.mensagem);
+                }
+            });
+        }).catch(error => {
+            console.log('Erro ao realizar cadastro', error)
+        });
+}
+    
+    function cadastraEmpresa() {
+        const razao_social = document.getElementById('razao_social').value;
+        const nome_fantasia = document.getElementById('nome_fantasia').value;
+        const cnpj = document.getElementById('cnpj').value;
+        const idtipo_empresa = document.getElementById('idtipo_empresa').value;
+
+        if (!razao_social || !nome_fantasia || !cnpj || !idtipo_empresa) {
+            alert('Preencha todos os campos!');
+            return
+        }
+        
+        const requestOptions = {
+            method: 'POST',
+            redirect: 'follow',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                razao_social: razao_social, nome_fantasia: nome_fantasia, cnpj: cnpj,
+                idtipo_empresa: idtipo_empresa
+            })
+        };
+
+        console.log(razao_social);
+        console.log(nome_fantasia);
+        console.log(cnpj);
+        console.log(idtipo_empresa);
+
+        fetch('/cadastro/empresas', requestOptions).then(response => {
             response.json().then(data => {
                 if (data.sucesso) {
                     // Se o cadastro for realizado com sucesso, ele retorna para a página de listagem

@@ -47,12 +47,12 @@ export default {
 
     async alterar(req, res, next) {
         const { idpessoa } = req.params;
-        const { nome, email, telefone, data_nascimento, data_cadastro, data_atualizacao, ativo } = req.body;
+        const { nome, email, idempresa, telefone, data_nascimento, data_cadastro, data_atualizacao, ativo } = req.body;
 
         try {
             const result = await conexao.client.query('UPDATE cad_pessoas SET nome = $1, email = $2,' +
             'telefone = $3, data_nascimento = $4, data_cadastro = $5, data_atualizacao = $6, ativo = $7 WHERE idpessoa = $8',
-                [nome, email, telefone, data_nascimento, data_cadastro, data_atualizacao, ativo, idpessoa]);
+                [nome, email, idempresa, telefone, data_nascimento, data_cadastro, data_atualizacao, ativo]);
             
             if (result.rowCount == 0) {
                 return res.status(404).send('Nenhúm usuário encontrado!');
