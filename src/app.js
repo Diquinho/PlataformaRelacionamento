@@ -13,6 +13,7 @@ class App {
         this.server.use(express.static(__dirname + '/pages'));
         this.server.use('/controllers', express.static(__dirname + '/controllers'));
         this.server.use('/css', express.static(__dirname + '/css'));
+        this.server.use('/js', express.static(__dirname + '/js'));
 
     }
 

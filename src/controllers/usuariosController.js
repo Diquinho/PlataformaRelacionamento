@@ -73,12 +73,12 @@ export default {
             );
             console.log('Consulta SQL: ', result.rows);
           if (result.rows.length == 0) {
-              res.status(401).json({ sucesso: false, mensagem:'Usuário não encontrado!'});
+              res.status(500).json({ sucesso: false, mensagem:'Usuário não encontrado!'});
           } else {
             if (result.rows[0].login === login && result.rows[0].senha === senha) {
               res.status(200).json({sucesso: true, mensagem: 'Login realizado com sucesso!'})
             } else {
-              res.status(401).json({sucesso: false, mensagem: 'Usuário ou senha incorretos, verifique!'})
+              res.status(500).json({sucesso: false, mensagem: 'Usuário ou senha incorretos, verifique!'})
             }
           }
         } catch (error) {

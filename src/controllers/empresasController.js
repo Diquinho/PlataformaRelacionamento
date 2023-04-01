@@ -61,5 +61,27 @@ export default {
         } catch (error) {
             return res.status(500).send('Erro ao atualizar cadastro de empresa!');
         }
+    },
+
+    async consultaTipoEmpresa(req, res, next) {
+        const { idtipo_empresa, descricao } = req.body;
+
+        try {
+            const result = await conexao.client.query('SELECT idtipo_empresa, descricao FROM tipo_empresas');
+            let tipo_empresas = [];
+
+            result.rows.forEach((row) => {
+                let tipoEmpresa = {
+                    idtipo_empresa: row.idtipo_empresa,
+                    descricao: row.descricao
+                };
+                tipo_empresas.push(tipoEmpresa);
+                console.log(tipoEmpresa);
+            });
+
+            return res.status(200).send(tipo_empresas);
+        } catch (error) {
+            return res.status(500).send('Erro ao buscar tipos de empresa');
+        }
     }
 }

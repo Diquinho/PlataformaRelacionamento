@@ -7,12 +7,6 @@ import empresasController from "./controllers/empresasController";
 import relacionamentoController from "./controllers/relacionamentoController";
 const path = require('path');
 
-// ==================================== ROTA INICIAL DE TESTE ========================================
-
-routes.get('/', (req, res) => {
-    return res.json({ ok: true });
-});
-
 //==================================== ROTA DE PÁGINAS HTML ========================================
 
 // DEFININDO ROTAS QUE SERÃO CHAMADOS MEUS ARQUIVOS HTML. Exemplo: localhost:3333/login
@@ -46,6 +40,9 @@ routes.post('/cadastro/pessoas', pessoasController.create);
 
 // ROTA PARA CADASTRAR UMA NOVA EMPRESA
 routes.post('/cadastro/empresas', empresasController.create);
+
+//ROTA PARA BUSCAR TIPOS DE EMPRESA
+routes.get('/cadastro/tipo/empresa', empresasController.consultaTipoEmpresa);
 
 //USUARIOS
 routes.post('/usuarios', usuariosController.create);
