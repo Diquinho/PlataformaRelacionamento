@@ -9,10 +9,10 @@ export default {
                 + ' data_relacionamento, observacoes) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING idrelacionamento',
                 [titulo, descricao, idcliente, idempresa, idtipo_relacionamento, data_relacionamento, observacoes]);
 
-            return res.status(201).send(`${titulo} inserido com sucesso!`);
+            return res.status(201).json({sucesso: true, mensagem:`${titulo} inserido com sucesso!`});
         } catch (error) {
             console.log(error)
-            return res.status(500).send('Erro ao realizar cadastro de relacionamento.');
+            return res.status(500).json({sucesso: false, mensagem:'Erro ao realizar cadastro de relacionamento.'});
         }
     },
 
@@ -20,9 +20,9 @@ export default {
         try {
             const result = await conexao.client.query('SELECT * FROM relacionamentos');
 
-            return res.status(201).send('Busca por relacionamentos realizado com sucesso!');
+            return res.status(201).json({sucesso: true, mensagem:'Busca por relacionamentos realizado com sucesso!'});
         } catch (error) {
-            return res.status(500).send('Nenhuma relacionamento encontrado!');
+            return res.status(500).json({sucesso: false, mensagem:'Nenhuma relacionamento encontrado!'});
         }
     },
 
@@ -34,12 +34,12 @@ export default {
             [idrelacionamento]);
 
             if (result.rowCount == 0) {
-                return res.status(404).send('Cadastro de relacionamentos não encontrado');
+                return res.status(404).json({ sucesso: false, mensagem: 'Cadastro de relacionamentos não encontrado' });
             } else {
-                return res.status(200).send(`Relacionamento: ${titulo} removido com sucesso!`);
+                return res.status(200).json({sucesso: true, mensagem:`Relacionamento: ${titulo} removido com sucesso!`});
             }
         } catch (error) {
-            return res.status(500).send('Erro ao remover cadastro de relacionamento!');
+            return res.status(500).json({sucesso: false, mensagem:'Erro ao remover cadastro de relacionamento!'});
         }
     },
 
@@ -54,12 +54,12 @@ export default {
                 [titulo, descricao, idcliente, idempresa, idtipo_relacionamento, data_relacionamento, observacoes, idrelacionamento]);
             
             if (result.rowCount == 0) {
-                return res.status(404).send('Nenhúm relacionamento encontrado!');
+                return res.status(404).json({ sucesso: false, mensagem: 'Nenhúm relacionamento encontrado!' });
             } else {
-                return res.status(200).send(`Relacionamento: ${titulo} alterado com sucesso!`);
+                return res.status(200).json({sucesso: true, mensagem:`Relacionamento: ${titulo} alterado com sucesso!`});
             }
         } catch (error) {
-            return res.status(500).send('Erro ao atualizar cadastro de relacionamento!');
+            return res.status(500).json({sucesso: false, mensagem:'Erro ao atualizar cadastro de relacionamento!'});
         }
     }
 }

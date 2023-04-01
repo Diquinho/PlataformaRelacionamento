@@ -1,3 +1,5 @@
+// EVENTO DE CLIQUE PARA SALVAR O CADASTRO DE EMPRESA
+
 const btnSalvarCadastroEmpresa = document.getElementById('btn-cadastra-empresa');
 
 if (btnSalvarCadastroEmpresa) {

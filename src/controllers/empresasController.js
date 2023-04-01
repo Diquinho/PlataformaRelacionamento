@@ -10,10 +10,10 @@ export default {
                 + ' idtipo_empresa, data_cadastro, ativo) VALUES ($1, $2, $3, $4, now(), true) RETURNING idempresa',
                 [razao_social, nome_fantasia, cnpj, idtipo_empresa]);
 
-            return res.status(201).send(`Cadastro da empresa ${razao_social} realizado com sucesso!!`);
+            return res.status(201).json({sucesso: true, mensagem: `Cadastro da empresa ${razao_social} realizado com sucesso!!`});
         } catch (error) {
             console.log(error)
-            return res.status(500).send('Erro ao realizar cadastro da empresa!');
+            return res.status(500).json({sucesso: false, mensagem:'Erro ao realizar cadastro da empresa!'});
         }
     },
 
@@ -21,9 +21,9 @@ export default {
         try {
             const result = await conexao.client.query('SELECT * FROM cad_empresas');
 
-            return res.status(201).send('Busca por cadastro de empresas realizada com sucesso!');
+            return res.status(201).json({sucesso: true, mensagem:'Busca por cadastro de empresas realizada com sucesso!'});
         } catch (error) {
-            return res.status(500).send('Nenhuma empresa encontrado!');
+            return res.status(500).json({sucesso: false, mensagem:'Nenhuma empresa encontrado!'});
         }
     },
 
@@ -35,12 +35,12 @@ export default {
             [idempresa]);
 
             if (result.rowCount == 0) {
-                return res.status(404).send('Cadastro de empresa não encontrado');
+                return res.status(404).json({ sucesso: false, mensagem: 'Cadastro de empresa não encontrado' });
             } else {
-                return res.status(200).send(`Empresa: ${razao_social} removida com sucesso!`);
+                return res.status(200).json({sucesso: true, mensagem: `Empresa: ${razao_social} removida com sucesso!`});
             }
         } catch (error) {
-            return res.status(500).send('Erro ao remover cadastro de empresa!');
+            return res.status(500).json({sucesso: false, mensagem:'Erro ao remover cadastro de empresa!'});
         }
     },
 
@@ -54,12 +54,12 @@ export default {
                 [razao_social, idpessoa_responsavel, idtipo_empresa, data_cadastro, tipo, ativo, idempresa]);
             
             if (result.rowCount == 0) {
-                return res.status(404).send('Nenhuma empresa encontrada!');
+                return res.status(404).json({ sucesso: false, mensagem: 'Nenhuma empresa encontrada!' });
             } else {
-                return res.status(200).send(`Dados referente a empresa ${razao_social} alterados com sucesso!`);
+                return res.status(200).json({sucesso: true, mensagem:`Dados referente a empresa ${razao_social} alterados com sucesso!`});
             }
         } catch (error) {
-            return res.status(500).send('Erro ao atualizar cadastro de empresa!');
+            return res.status(500).json({sucesso: false, mensagem:'Erro ao atualizar cadastro de empresa!'});
         }
     },
 
@@ -81,7 +81,7 @@ export default {
 
             return res.status(200).send(tipo_empresas);
         } catch (error) {
-            return res.status(500).send('Erro ao buscar tipos de empresa');
+            return res.status(500).json({sucesso: true, mensagem:'Erro ao buscar tipos de empresa'});
         }
     }
 }

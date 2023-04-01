@@ -6,12 +6,12 @@ export default {
         const { login, senha, data_cadastro, ativo } = req.body;
 
         try {
-            const result = await conexao.client.query('INSERT INTO cad_usuarios (login, senha, data_cadastro,'+
+            const result = await conexao.client.query('INSERT INTO cad_usuarios (login, senha, data_cadastro,' +
                 ' ativo) VALUES ($1, $2, $3, $4) RETURNING idusuario', [login, senha, data_cadastro, ativo]);
 
-            return res.status(201).send(`Usuário: ${login} inserido com sucesso!!`);
+            return res.status(201).json({sucesso: true, mensagem:`Usuário: ${login} inserido com sucesso!!`});
         } catch (error) {
-            return res.status(500).json({ message: 'Erro ao criar usuário'});
+            return res.status(500).json({sucesso: false, mensagem: 'Erro ao criar usuário'});
         }
     },
 
@@ -19,9 +19,9 @@ export default {
         try {
             const result = await conexao.client.query('SELECT * FROM cad_usuarios');
 
-            return res.status(201).send('Busca por usuário realizada com sucesso!');
+            return res.status(201).json({sucesso: true, mensagem:'Busca por usuário realizada com sucesso!'});
         } catch (error) {
-            return res.status(500).send('Nenhum usuário encontrado!');
+            return res.status(500).json({sucesso: false, mensagem:'Nenhum usuário encontrado!'});
         }
     },
 
@@ -33,12 +33,12 @@ export default {
             [idusuario]);
 
             if (result.rowCount == 0) {
-                return res.status(404).send('Usuário não encontrado');
+                return res.status(404).json({ sucesso: false, mensagem: 'Usuário não encontrado' });
             } else {
-                return res.status(200).send(`Usuário: ${login} removido com sucesso!`);
+                return res.status(200).json({sucesso: true, mensagem:`Usuário: ${login} removido com sucesso!`});
             }
         } catch (error) {
-            return res.status(500).send('Erro ao remover usuário!');
+            return res.status(500).json({sucesso: false, mensagem:'Erro ao remover usuário!'});
         }
     },
 
@@ -52,12 +52,12 @@ export default {
                 [login, senha, data_cadastro, ativo, idusuario]);
             
             if (result.rowCount == 0) {
-                return res.status(404).send('Nenhúm usuário encontrado!');
+                return res.status(404).json({ sucesso: false, mensagem: 'Nenhúm usuário encontrado!' });
             } else {
-                return res.status(200).send(`Usuário: ${login} alterado com sucesso!`);
+                return res.status(200).json({sucesso: true, mensagem:`Usuário: ${login} alterado com sucesso!`});
             }
         } catch (error) {
-            return res.status(500).send('Erro ao atualizar o usuário!');
+            return res.status(500).json({sucesso: false, mensagem:'Erro ao atualizar o usuário!'});
         }
     },
 

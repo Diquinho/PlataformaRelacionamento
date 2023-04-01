@@ -11,10 +11,10 @@ export default {
                 + ' telefone, data_nascimento, data_cadastro, data_atualizacao, ativo) VALUES ($1, $2, $3, $4, $5, now(), now(), true) RETURNING idpessoa',
                 [nome, email, idempresa, telefone, data_nascimento]);
 
-            return res.status(201).send(`${nome} inserido com sucesso!`);
+            return res.status(201).json({sucesso: true, mensagem: `${nome} inserido com sucesso!`});
         } catch (error) {
             console.log(error)
-            return res.status(500).send('Erro ao realizar cadastro de pessoa.');
+            return res.status(500).json({sucesso: false, mensagem:'Erro ao realizar cadastro de pessoa.'});
         }
     },
 
@@ -22,9 +22,9 @@ export default {
         try {
             const result = await conexao.client.query('SELECT * FROM cad_pessoas');
 
-            return res.status(201).send('Busca por cadastro de pessoa realizada com sucesso!');
+            return res.status(201).json({sucesso: true, mensagem:'Busca por cadastro de pessoa realizada com sucesso!'});
         } catch (error) {
-            return res.status(500).send('Nenhuma pessoa encontrado!');
+            return res.status(500).json({sucesso: false, mensagem:'Nenhuma pessoa encontrado!'});
         }
     },
 
@@ -36,12 +36,12 @@ export default {
             [idpessoa]);
 
             if (result.rowCount == 0) {
-                return res.status(404).send('Cadastro de pessoa não encontrado');
+                return res.status(404).json({ sucesso: false, mensagem: 'Cadastro de pessoa não encontrado' });
             } else {
-                return res.status(200).send(`Pessoa: ${nome} removido com sucesso!`);
+                return res.status(200).json({sucesso: true, mensagem:`Pessoa: ${nome} removido com sucesso!`});
             }
         } catch (error) {
-            return res.status(500).send('Erro ao remover cadastro de pessoa!');
+            return res.status(500).json({sucesso: false, mensagem:'Erro ao remover cadastro de pessoa!'});
         }
     },
 
@@ -55,12 +55,12 @@ export default {
                 [nome, email, idempresa, telefone, data_nascimento, data_cadastro, data_atualizacao, ativo]);
             
             if (result.rowCount == 0) {
-                return res.status(404).send('Nenhúm usuário encontrado!');
+                return res.status(404).json({ sucesso: false, mensagem: 'Nenhúm usuário encontrado!' });
             } else {
-                return res.status(200).send(`Cadastro: ${nome} alterado com sucesso!`);
+                return res.status(200).json({sucesso: true, mensagem:`Cadastro: ${nome} alterado com sucesso!`});
             }
         } catch (error) {
-            return res.status(500).send('Erro ao atualizar cadastro de pessoa!');
+            return res.status(500).json({sucesso: false, mensagem:'Erro ao atualizar cadastro de pessoa!'});
         }
     }
 }
