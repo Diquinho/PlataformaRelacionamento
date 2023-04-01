@@ -12,7 +12,7 @@ function cadastraEmpresa() {
     const razao_social = document.getElementById('razao_social').value;
     const nome_fantasia = document.getElementById('nome_fantasia').value;
     const cnpj = document.getElementById('cnpj').value;
-    const idtipo_empresa = document.getElementById('idtipo_empresa').value;
+    const idtipo_empresa = document.getElementById('tipo-empresa').value;
 
     if (!razao_social || !nome_fantasia || !cnpj || !idtipo_empresa) {
         alert('Preencha todos os campos!');
@@ -52,8 +52,8 @@ function cadastraEmpresa() {
     });
 }
 
-function buscaTipoEmpresa() {
-    const idtipo_empresa = document.getElementById('idtipo_empresa').value;
+function buscaTipoEmpresa(idtipo_empresa) {
+    //const idtipo_empresa = document.getElementById('idtipo_empresa').value;
 
     const requestOptions = {
         method: 'GET',
@@ -65,11 +65,12 @@ function buscaTipoEmpresa() {
   
     };
 
-    console.log(idtipo_empresa);
+    //console.log(idtipo_empresa);
 
     return new Promise(function (resolve, reject) {
         fetch('http://localhost:3333/cadastro/tipo/empresa?' + idtipo_empresa, requestOptions).then(async function (response) {
             if (response.status == 200) {
+                console.log('cheguei aqui <>')
                 const retorno = await response.json();
                 resolve(retorno);
             } else if (response.status == 401) {

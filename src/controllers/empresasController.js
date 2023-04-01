@@ -4,6 +4,7 @@ export default {
     async create(req, res) {
         console.log('Chegou no INSERT de Empresas!')
         const { razao_social, nome_fantasia, cnpj, idtipo_empresa, data_cadastro, ativo } = req.body;
+        console.log(req.body);
 
         try {
             const result = await conexao.client.query('INSERT INTO cad_empresas (razao_social, nome_fantasia, cnpj,'

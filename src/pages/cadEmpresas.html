@@ -22,13 +22,10 @@
             <label for="label_form_pessoas" class="form-label">CNPJ:</label>
             <input type="number" id="cnpj" class="form-control" name="cnpj"><br>
 
-            <label for="label_form_pessoas" class="form-label">Tipo:</label>
-            <input type="number" id="idtipo_empresa" class="form-control" name="idtipo_empresa"><br>
+            
 
             <label for="label_form_pessoas" class="form-label">Tipos de empresa</label>
-            <select class="form-select" id="tipo-empresa">
-                <option value="1">Opção 1</option>
-            </select>
+            <select class="form-select" id="tipo-empresa" name="idtipo_empresa"></select>
 
             <input type="button" class="btn btn-primary" id="btn-cadastra-empresa" value="Salvar">
         </form>
@@ -38,7 +35,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script>
         window.onload = function() {
-            buscaTipoEmpresa();
+            buscaTipoEmpresa().then(function(retorno){
+                    console.log('Cheguei no option',retorno);
+                    document.querySelector('#tipo-empresa').innerHTML = ""
+                    for(var item of retorno){
+                        document.querySelector("#tipo-empresa").innerHTML += "<option value='"+item.idtipo_empresa+"'>"+item.descricao+"</option>"
+                    }
+                });
         }
     </script>
    
