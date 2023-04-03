@@ -44,6 +44,9 @@ routes.post('/cadastro/empresas', empresasController.create);
 //ROTA PARA BUSCAR TIPOS DE EMPRESA
 routes.get('/cadastro/tipo/empresa', empresasController.consultaTipoEmpresa);
 
+// ROTA PARA BUSCAR CADASTRO DE EMPRESAS
+routes.get('/cadastro/pessoas/empresa', pessoasController.consultaEmpresa);
+
 //USUARIOS
 routes.post('/usuarios', usuariosController.create);
 routes.get('/usuarios', usuariosController.consultar);

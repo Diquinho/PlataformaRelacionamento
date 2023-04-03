@@ -12,7 +12,7 @@ function cadastraPessoa() {
     const email = document.getElementById('email').value;
     const telefone = document.getElementById('telefone').value;
     const data_nascimento = document.getElementById('data_nascimento').value;
-    const idempresa = document.getElementById('idempresa').value;
+    const idempresa = document.getElementById('cad-empresas').value;
 
     if (!nome || !email || !telefone || !idempresa) {
         alert('Preencha todos os campos!');
@@ -49,5 +49,36 @@ function cadastraPessoa() {
         });
     }).catch(error => {
         console.log('Erro ao realizar cadastro', error)
+    });
+}
+
+function buscaEmpresa(idempresa) {
+    //const idtipo_empresa = document.getElementById('idtipo_empresa').value;
+
+    const requestOptions = {
+        method: 'GET',
+        redirect: 'follow',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+  
+    };
+
+    return new Promise(function (resolve, reject) {
+        fetch('http://localhost:3333/cadastro/pessoas/empresa?' + idempresa, requestOptions).then(async function (response) {
+            if (response.status == 200) {
+                console.log('cheguei aqui <>')
+                const retorno = await response.json();
+                resolve(retorno);
+            } else if (response.status == 401) {
+                alert('Erro ao trazer empresas cadastradas!')
+            } else {
+                reject({
+                    status: this.status,
+                    statusText: this.statusText
+                });
+            }
+        })
     });
 }

@@ -62,5 +62,27 @@ export default {
         } catch (error) {
             return res.status(500).json({sucesso: false, mensagem:'Erro ao atualizar cadastro de pessoa!'});
         }
+    },
+
+    async consultaEmpresa(req, res, next) {
+        const { idempresa, razao_social } = req.body;
+
+        try {
+            const result = await conexao.client.query('SELECT idempresa, razao_social FROM cad_empresas');
+            let cad_empresas = [];
+
+            result.rows.forEach((row) => {
+                let cadEmpresas = {
+                    idempresa: row.idempresa,
+                    razao_social: row.razao_social
+                };
+                cad_empresas.push(cadEmpresas);
+                console.log(cadEmpresas);
+            });
+
+            return res.status(200).send(cad_empresas);
+        } catch (error) {
+            return res.status(500).json({sucesso: true, mensagem:'Erro ao buscar empresas cadastradas'});
+        }
     }
 }
