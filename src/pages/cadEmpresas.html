@@ -22,12 +22,11 @@
             <label for="label_form_pessoas" class="form-label">CNPJ:</label>
             <input type="number" id="cnpj" class="form-control" name="cnpj"><br>
 
-            
-
             <label for="label_form_pessoas" class="form-label">Tipos de empresa</label>
-            <select class="form-select" id="tipo-empresa" name="idtipo_empresa"></select>
+            <select class="form-select" id="tipo-empresa" name="idtipo_empresa"></select><br>
 
             <input type="button" class="btn btn-primary" id="btn-cadastra-empresa" value="Salvar">
+            <input type="button"class="btn btn-secondary" id="btn-voltar" value="Cancelar">
         </form>
 
     <script src="../js/cadEmpresas.js"></script>
@@ -36,7 +35,6 @@
     <script>
         window.onload = function() {
             buscaTipoEmpresa().then(function(retorno){
-                    console.log('Cheguei no option',retorno);
                     document.querySelector('#tipo-empresa').innerHTML = ""
                     for(var item of retorno){
                         document.querySelector("#tipo-empresa").innerHTML += "<option value='"+item.idtipo_empresa+"'>"+item.descricao+"</option>"

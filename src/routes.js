@@ -25,6 +25,11 @@ routes.get('/empresas', (req, res) => {
     res.sendFile(formPath);
 })
 
+routes.get('/relacionamentos', (req, res) => {
+    const formPath = path.resolve(__dirname, '..', 'src', 'pages', 'cadRelacionamentos.html');
+    res.sendFile(formPath);
+})
+
 // ROTA ONDE É CHAMADO MEU SCRIPT.JS
 routes.get('/login/script', (req, res) => {
     const loginPath = path.resolve(__dirname, '..', 'src', 'pages', 'script.js');
@@ -38,6 +43,9 @@ routes.post('/usuarios/login', usuariosController.logar);
 // ROTA PARA CADASTRAR UMA NOVA PESSOA
 routes.post('/cadastro/pessoas', pessoasController.create);
 
+// ROTA PARA CADASTRAR UM NOVO RELACIONAMENTO
+routes.post('/cadastro/relacionamentos', relacionamentoController.create);
+
 // ROTA PARA CADASTRAR UMA NOVA EMPRESA
 routes.post('/cadastro/empresas', empresasController.create);
 
@@ -47,6 +55,12 @@ routes.get('/cadastro/tipo/empresa', empresasController.consultaTipoEmpresa);
 // ROTA PARA BUSCAR CADASTRO DE EMPRESAS
 routes.get('/cadastro/pessoas/empresa', pessoasController.consultaEmpresa);
 
+// ROTA PARA BUSCAR CADASTRO DE PESSOAS
+routes.get('/consulta/pessoas', pessoasController.consultar);
+
+// ROTA PARA BUSCAR O TIPO DE RELACIONAMENTO
+routes.get('/consultar/relacionamento/tipo', relacionamentoController.consultaTipoRelacionamento);
+
 //USUARIOS
 routes.post('/usuarios', usuariosController.create);
 routes.get('/usuarios', usuariosController.consultar);
@@ -54,7 +68,7 @@ routes.delete('/usuarios/:idusuario', usuariosController.delete);
 routes.put('/usuarios/:idusuario', usuariosController.alterar);
 
 //PESSOAS
-routes.post('/pessoas', pessoasController.create);
+
 routes.get('/pessoas', pessoasController.consultar);
 routes.delete('/pessoas/:idpessoa', pessoasController.delete);
 routes.put('/pessoas/:idpessoa', pessoasController.alterar);

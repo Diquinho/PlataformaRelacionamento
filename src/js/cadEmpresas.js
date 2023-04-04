@@ -70,7 +70,6 @@ function buscaTipoEmpresa(idtipo_empresa) {
     return new Promise(function (resolve, reject) {
         fetch('http://localhost:3333/cadastro/tipo/empresa?' + idtipo_empresa, requestOptions).then(async function (response) {
             if (response.status == 200) {
-                console.log('cheguei aqui <>')
                 const retorno = await response.json();
                 resolve(retorno);
             } else if (response.status == 401) {

@@ -26,11 +26,12 @@
             <input type="date" id="data_nascimento" class="form-control" name="data_nascimento"><br>
 
             <label for="label_form_pessoas" class="form-label">Empresas</label>
-            <select class="form-select" id="cad-empresas" name="idempresa"></select>
+            <select class="form-select" id="cad-empresas" name="idempresa"></select><br>
           
             
 
             <input type="button" class="btn btn-primary" id="btn-cadastra-pessoa" value="Salvar">
+            <input type="button"class="btn btn-secondary" id="btn-voltar" value="Cancelar">
         </form>
 
     <script src="../js/cadPessoas.js"></script>
@@ -39,7 +40,6 @@
     <script>
         window.onload = function() {
             buscaEmpresa().then(function(retorno){
-                    console.log('Cheguei no option',retorno);
                     document.querySelector('#cad-empresas').innerHTML = ""
                     for(var item of retorno){
                         document.querySelector("#cad-empresas").innerHTML += "<option value='"+item.idempresa+"'>"+item.razao_social+"</option>"

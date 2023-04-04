@@ -2,12 +2,12 @@ import conexao from "../conexao";
 
 export default {
     async create(req, res) {
-        const { titulo, descricao, idcliente, idempresa, idtipo_relacionamento, data_relacionamento, observacoes } = req.body;
+        const { titulo, descricao, idcliente, idempresa, idtipo_relacionamento, data_relacionamento, observacao, status } = req.body;
 
         try {
             const result = await conexao.client.query('INSERT INTO relacionamentos (titulo, descricao, idcliente, idempresa, idtipo_relacionamento,'
-                + ' data_relacionamento, observacoes) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING idrelacionamento',
-                [titulo, descricao, idcliente, idempresa, idtipo_relacionamento, data_relacionamento, observacoes]);
+                + ' data_relacionamento, observacao, status) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING idrelacionamento',
+                [titulo, descricao, idcliente, idempresa, idtipo_relacionamento, data_relacionamento, observacao, status]);
 
             return res.status(201).json({sucesso: true, mensagem:`${titulo} inserido com sucesso!`});
         } catch (error) {
@@ -60,6 +60,29 @@ export default {
             }
         } catch (error) {
             return res.status(500).json({sucesso: false, mensagem:'Erro ao atualizar cadastro de relacionamento!'});
+        }
+    },
+
+    async consultaTipoRelacionamento(req, res, next) {
+        const { idtipo_relacionamento, descricao } = req.body;
+
+        try {
+            const result = await conexao.client.query('SELECT idtipo_relacionamento, descricao FROM tipo_relacionamento');
+
+            let tipo_relacionamento = [];
+
+            result.rows.forEach((row) => {
+                let tipoRelacionamento = {
+                    idtipo_relacionamento: row.idtipo_relacionamento,
+                    descricao: row.descricao
+                };
+                tipo_relacionamento.push(tipoRelacionamento);
+                console.log(tipoRelacionamento);
+            });
+
+            return res.status(200).send(tipo_relacionamento);
+        } catch (error) {
+            
         }
     }
 }

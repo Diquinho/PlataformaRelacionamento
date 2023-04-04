@@ -19,10 +19,22 @@ export default {
     },
 
     async consultar(req, res) {
-        try {
-            const result = await conexao.client.query('SELECT * FROM cad_pessoas');
+        const { idpessoa, nome } = req.body;
 
-            return res.status(201).json({sucesso: true, mensagem:'Busca por cadastro de pessoa realizada com sucesso!'});
+        try {
+            const result = await conexao.client.query('SELECT idpessoa, nome FROM cad_pessoas');
+            let cad_pessoas = [];
+
+            result.rows.forEach((row) => {
+                let cadPessoas = {
+                    idpessoa: row.idpessoa,
+                    nome: row.nome
+                };
+                cad_pessoas.push(cadPessoas);
+                console.log(cadPessoas);
+            });
+
+            return res.status(200).send(cad_pessoas);
         } catch (error) {
             return res.status(500).json({sucesso: false, mensagem:'Nenhuma pessoa encontrado!'});
         }
