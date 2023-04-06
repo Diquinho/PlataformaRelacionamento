@@ -28,13 +28,19 @@ routes.get('/empresas', (req, res) => {
 routes.get('/relacionamentos', (req, res) => {
     const formPath = path.resolve(__dirname, '..', 'src', 'pages', 'cadRelacionamentos.html');
     res.sendFile(formPath);
-})
+});
+
+routes.get('/lista/empresas', (req, res) => {
+    const loginPath = path.resolve(__dirname, '..', 'src', 'pages', 'listaEmpresas.html');
+    res.sendFile(loginPath);
+});
 
 // ROTA ONDE É CHAMADO MEU SCRIPT.JS
 routes.get('/login/script', (req, res) => {
     const loginPath = path.resolve(__dirname, '..', 'src', 'pages', 'script.js');
     res.sendFile(loginPath);
-  });
+});
+  
 
 //==================================== ROTA DE API RESTFULL ========================================
 // ROTA PARA REALIZAR LOGIN
