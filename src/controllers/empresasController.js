@@ -22,7 +22,23 @@ export default {
         try {
             const result = await conexao.client.query('SELECT * FROM cad_empresas');
 
-            return res.status(201).json({sucesso: true, mensagem:'Busca por cadastro de empresas realizada com sucesso!'});
+            let lista_empresas = [];
+
+            result.rows.forEach((row) => {
+                let listaEmpresa = {
+                    idempresa: row.idempresa,
+                    razao_social: row.razao_social,
+                    nome_fantasia: row.nome_fantasia,
+                    cnpj: row.cnpj,
+                    idtipo_empresa: row.idtipo_empresa,
+                    data_cadastro: row.data_cadastro,
+                    ativo: row.ativo
+                };
+                lista_empresas.push(listaEmpresa);
+                console.log(listaEmpresa);
+            });
+
+            return res.status(200).send(lista_empresas);
         } catch (error) {
             return res.status(500).json({sucesso: false, mensagem:'Nenhuma empresa encontrado!'});
         }

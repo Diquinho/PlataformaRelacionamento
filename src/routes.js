@@ -67,6 +67,9 @@ routes.get('/consulta/pessoas', pessoasController.consultar);
 // ROTA PARA BUSCAR O TIPO DE RELACIONAMENTO
 routes.get('/consultar/relacionamento/tipo', relacionamentoController.consultaTipoRelacionamento);
 
+// ROTA PARA LISTAR TODAS AS EMPRESAS
+routes.get('/empresas/lista', empresasController.consultar);
+
 //USUARIOS
 routes.post('/usuarios', usuariosController.create);
 routes.get('/usuarios', usuariosController.consultar);
