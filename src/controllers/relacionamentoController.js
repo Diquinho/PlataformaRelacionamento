@@ -20,9 +20,23 @@ export default {
         try {
             const result = await conexao.client.query('SELECT * FROM relacionamentos');
 
-            return res.status(201).json({sucesso: true, mensagem:'Busca por relacionamentos realizado com sucesso!'});
+            let lista_relacionamentos = [];
+
+            result.rows.forEach((row) => {
+                let listaRelacionamento = {
+                    titulo: row.titulo,
+                    idempresa: row.idempresa,
+                    idtipo_relacionamento: row.idtipo_relacionamento,
+                    data_relacionamento: row.data_relacionamento,
+                    status: row.status,
+                };
+                lista_relacionamentos.push(listaRelacionamento);
+                console.log(listaRelacionamento);
+            });
+
+            return res.status(200).send(lista_relacionamentos);
         } catch (error) {
-            return res.status(500).json({sucesso: false, mensagem:'Nenhuma relacionamento encontrado!'});
+            return res.status(500).json({sucesso: false, mensagem:'Nenhum relacionamento encontrado!'});
         }
     },
 

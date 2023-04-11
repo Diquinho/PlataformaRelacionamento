@@ -104,6 +104,7 @@ function lista_empresas() {
         fetch('http://localhost:3333/empresas/lista', requestOptions).then(async function (response) {
             if (response.status == 200) {
                 const retorno = await response.json();
+                console.log('estamos aqui')
                 resolve(retorno);
             } else if (response.status == 401) {
                 alert('Erro ao trazer listagem de empresas!')

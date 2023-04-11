@@ -11,6 +11,7 @@
     <title>Lista Cadastros de Empresas</title>
 </head>
 <body>
+    <h1>Lista de Empresas</h1>
     <div class="container" id="div-lista-dados">
         <table class="table table-hover table-borderless">
             <thead>
@@ -33,7 +34,6 @@
                 <td id="ativo"></td>
             </tr>
             
-            
             </tbody>
         </table>
     </div>
@@ -44,24 +44,41 @@
     <script>
         window.onload = function() {
             lista_empresas().then(function(retorno){
-                    document.querySelector('#cnpj').innerHTML = ""
-                    document.querySelector('#razao_social').innerHTML = ""
-                    document.querySelector('#nome_fantasia').innerHTML = ""
-                    document.querySelector('#idtipo_empresa').innerHTML = ""
-                    document.querySelector('#data_cadastro').innerHTML = ""
-                    document.querySelector('#ativo').innerHTML = ""
+                console.log('Objeto JSON: ', retorno)
+                var tbody = document.querySelector('tbody');
 
-                    for(var item of retorno){
-                    document.querySelector('#cnpj').innerHTML = `<td>${item.cnpj}</td>`;
-                    document.querySelector('#razao_social').innerHTML = `<td>${item.razao_social}</td>`;
-                    document.querySelector('#nome_fantasia').innerHTML = `<td>${item.nome_fantasia}</td>`;
-                    document.querySelector('#idtipo_empresa').innerHTML = `<td>${item.idtipo_empresa}</td>`;
-                    document.querySelector('#data_cadastro').innerHTML = `<td>${item.data_cadastro}</td>`;
-                    document.querySelector('#ativo').innerHTML = `<td>${item.ativo}</td>`; 
-                    }
-                });
+                for(var item of retorno){
+                    var row = document.createElement('tr');
+
+                    var cnpjCell = document.createElement('td');
+                    cnpjCell.textContent = item.cnpj;
+                    row.appendChild(cnpjCell);
+
+                    var razaoSocialCell = document.createElement('td');
+                    razaoSocialCell.textContent = item.razao_social;
+                    row.appendChild(razaoSocialCell);
+
+                    var nomeFantasiaCell = document.createElement('td');
+                    nomeFantasiaCell.textContent = item.nome_fantasia;
+                    row.appendChild(nomeFantasiaCell);
+
+                    var idTipoEmpresaCell = document.createElement('td');
+                    idTipoEmpresaCell.textContent = item.idtipo_empresa;
+                    row.appendChild(idTipoEmpresaCell);
+
+                    var dataCadastroCell = document.createElement('td');
+                    dataCadastroCell.textContent = item.data_cadastro;
+                    row.appendChild(dataCadastroCell);
+
+                    var ativoCell = document.createElement('td');
+                    ativoCell.textContent = item.ativo;
+                    row.appendChild(ativoCell);
+
+                    tbody.appendChild(row);
+                }
+            });
         }
     </script>
-    
+ 
 </body>
 </html>

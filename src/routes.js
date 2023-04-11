@@ -35,6 +35,16 @@ routes.get('/lista/empresas', (req, res) => {
     res.sendFile(loginPath);
 });
 
+routes.get('/lista/pessoas', (req, res) => {
+    const loginPath = path.resolve(__dirname, '..', 'src', 'pages', 'listaPessoas.html');
+    res.sendFile(loginPath);
+});
+
+routes.get('/lista/relacionamento', (req, res) => {
+    const loginPath = path.resolve(__dirname, '..', 'src', 'pages', 'listaRelacionamento.html');
+    res.sendFile(loginPath);
+});
+
 // ROTA ONDE É CHAMADO MEU SCRIPT.JS
 routes.get('/login/script', (req, res) => {
     const loginPath = path.resolve(__dirname, '..', 'src', 'pages', 'script.js');
@@ -69,6 +79,12 @@ routes.get('/consultar/relacionamento/tipo', relacionamentoController.consultaTi
 
 // ROTA PARA LISTAR TODAS AS EMPRESAS
 routes.get('/empresas/lista', empresasController.consultar);
+
+// ROTA PARA LISTAR TODAS AS PESSOAS
+routes.get('/pessoas/lista', pessoasController.lista_pessoas);
+
+// ROTA PARA LISTAR TODOS OS RELACIONAMENTOS
+routes.get('/relacionamento/lista', relacionamentoController.consultar);
 
 //USUARIOS
 routes.post('/usuarios', usuariosController.create);
