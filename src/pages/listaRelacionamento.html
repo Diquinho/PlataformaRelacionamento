@@ -12,6 +12,7 @@
 </head>
 <body>
     <h1>Lista de Relacionamentos</h1>
+    <a href="http://localhost:3333/relacionamentos" type="button" class="btn btn-primary">Novo</a>
     <div class="container" id="div-lista-dados">
         <table class="table table-hover table-borderless">
             <thead>
@@ -37,7 +38,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="../js/cadRelacionamentos.js"></script>
+    <script src="../js/listaRelacionamento.js"></script>
 
     <script>
         window.onload = function() {
@@ -53,11 +54,11 @@
                     row.appendChild(tituloRow);
 
                     var empresaRow = document.createElement('td');
-                    empresaRow.textContent = item.idempresa;
+                    empresaRow.textContent = item.nome_empresa;
                     row.appendChild(empresaRow);
 
                     var tipo_relacionamentoRow = document.createElement('td');
-                    tipo_relacionamentoRow.textContent = item.idtipo_relacionamento;
+                    tipo_relacionamentoRow.textContent = item.descricao;
                     row.appendChild(tipo_relacionamentoRow);
 
                     var dataRow = document.createElement('td');

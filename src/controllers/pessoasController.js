@@ -102,7 +102,10 @@ export default {
         //const { idpessoa, nome } = req.body;
 
         try {
-            const result = await conexao.client.query('SELECT * FROM cad_pessoas');
+            const result = await conexao.client.query('select cp.nome, cp.email, coalesce(ce.razao_social, ce.nome_fantasia) as nome_empresa, cp.telefone, cp.data_nascimento, cp.data_cadastro, cp.ativo ' +
+                'from cad_pessoas as cp left join cad_empresas as ce on cp.idempresa = ce.idempresa ' +
+                'where cp.ativo = true order by nome;');
+            
             let lista_pessoas = [];
 
             result.rows.forEach((row) => {
@@ -110,7 +113,7 @@ export default {
                     idpessoa: row.idpessoa,
                     nome: row.nome,
                     email: row.email,
-                    idempresa: row.idempresa,
+                    nome_empresa: row.nome_empresa,
                     telefone: row.telefone,
                     data_nascimento: row.data_nascimento,
                     data_cadastro: row.data_cadastro,

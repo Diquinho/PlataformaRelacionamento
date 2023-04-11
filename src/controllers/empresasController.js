@@ -20,7 +20,9 @@ export default {
 
     async consultar(req, res) {
         try {
-            const result = await conexao.client.query('SELECT * FROM cad_empresas');
+            const result = await conexao.client.query('SELECT ce.cnpj, ce.razao_social, ce.nome_fantasia, te.descricao, ce.data_cadastro, ' +
+            'ce.ativo FROM cad_empresas as ce left join tipo_empresas as te on ce.idtipo_empresa = te.idtipo_empresa ' +
+                'where ce.ativo = true;');
 
             let lista_empresas = [];
 
@@ -30,7 +32,7 @@ export default {
                     razao_social: row.razao_social,
                     nome_fantasia: row.nome_fantasia,
                     cnpj: row.cnpj,
-                    idtipo_empresa: row.idtipo_empresa,
+                    descricao: row.descricao,
                     data_cadastro: row.data_cadastro,
                     ativo: row.ativo
                 };

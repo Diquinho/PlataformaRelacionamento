@@ -12,6 +12,7 @@
 </head>
 <body>
     <h1>Lista de Pessoas</h1>
+    <a href="http://localhost:3333/pessoas" type="button" class="btn btn-primary">Novo</a>
     <div class="container" id="div-lista-dados">
         <table class="table table-hover table-borderless">
             <thead>
@@ -43,11 +44,11 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="../js/cadPessoas.js"></script>
+    <script src="../js/listaPessoas.js"></script>
 
     <script>
         window.onload = function() {
-            lista_empresas().then(function(retorno){
+            lista_pessoas().then(function(retorno){
                 console.log('Objeto JSON: ', retorno)
                 var tbody = document.querySelector('tbody');
 
@@ -62,9 +63,9 @@
                     emailRow.textContent = item.email;
                     row.appendChild(emailRow);
 
-                    var idempresaRow = document.createElement('td');
-                    idempresaRow.textContent = item.idempresa;
-                    row.appendChild(idempresaRow);
+                    var empresaRow = document.createElement('td');
+                    empresaRow.textContent = item.nome_empresa;
+                    row.appendChild(empresaRow);
 
                     var telefoneRow = document.createElement('td');
                     telefoneRow.textContent = item.telefone;

@@ -18,15 +18,17 @@ export default {
 
     async consultar(req, res) {
         try {
-            const result = await conexao.client.query('SELECT * FROM relacionamentos');
+            const result = await conexao.client.query('SELECT r.titulo, coalesce(ce.razao_social, ce.nome_fantasia) as nome_empresa, ' +
+            'tr.descricao,r.data_relacionamento, r.status FROM relacionamentos as r left join cad_empresas as ce on r.idempresa = ce.idempresa ' +
+            'left join tipo_relacionamento as tr on r.idtipo_relacionamento = tr.idtipo_relacionamento;');
 
             let lista_relacionamentos = [];
 
             result.rows.forEach((row) => {
                 let listaRelacionamento = {
                     titulo: row.titulo,
-                    idempresa: row.idempresa,
-                    idtipo_relacionamento: row.idtipo_relacionamento,
+                    nome_empresa: row.nome_empresa,
+                    descricao: row.descricao,
                     data_relacionamento: row.data_relacionamento,
                     status: row.status,
                 };

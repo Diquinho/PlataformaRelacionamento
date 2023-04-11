@@ -12,6 +12,7 @@
 </head>
 <body>
     <h1>Lista de Empresas</h1>
+    <a href="http://localhost:3333/empresas" type="button" class="btn btn-primary">Novo</a>
     <div class="container" id="div-lista-dados">
         <table class="table table-hover table-borderless">
             <thead>
@@ -29,7 +30,7 @@
                 <td id="cnpj"></td>
                 <td id="razao_social"></td>
                 <td id="nome_fantasia"></td>
-                <td id="idtipo_empresa"></td>
+                <td id="descricao"></td>
                 <td id="data_cadastro"></td>
                 <td id="ativo"></td>
             </tr>
@@ -39,7 +40,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="../js/cadEmpresas.js"></script>
+    <script src="../js/listaEmpresas.js"></script>
 
     <script>
         window.onload = function() {
@@ -50,29 +51,29 @@
                 for(var item of retorno){
                     var row = document.createElement('tr');
 
-                    var cnpjCell = document.createElement('td');
-                    cnpjCell.textContent = item.cnpj;
-                    row.appendChild(cnpjCell);
+                    var cnpjRow = document.createElement('td');
+                    cnpjRow.textContent = item.cnpj;
+                    row.appendChild(cnpjRow);
 
-                    var razaoSocialCell = document.createElement('td');
-                    razaoSocialCell.textContent = item.razao_social;
-                    row.appendChild(razaoSocialCell);
+                    var razao_socialRow = document.createElement('td');
+                    razao_socialRow.textContent = item.razao_social;
+                    row.appendChild(razao_socialRow);
 
-                    var nomeFantasiaCell = document.createElement('td');
-                    nomeFantasiaCell.textContent = item.nome_fantasia;
-                    row.appendChild(nomeFantasiaCell);
+                    var nome_fantasiaRow = document.createElement('td');
+                    nome_fantasiaRow.textContent = item.nome_fantasia;
+                    row.appendChild(nome_fantasiaRow);
 
-                    var idTipoEmpresaCell = document.createElement('td');
-                    idTipoEmpresaCell.textContent = item.idtipo_empresa;
-                    row.appendChild(idTipoEmpresaCell);
+                    var descricao_empresaRow = document.createElement('td');
+                    descricao_empresaRow.textContent = item.descricao;
+                    row.appendChild(descricao_empresaRow);
 
-                    var dataCadastroCell = document.createElement('td');
-                    dataCadastroCell.textContent = item.data_cadastro;
-                    row.appendChild(dataCadastroCell);
+                    var data_cadastroRow = document.createElement('td');
+                    data_cadastroRow.textContent = item.data_cadastro;
+                    row.appendChild(data_cadastroRow);
 
-                    var ativoCell = document.createElement('td');
-                    ativoCell.textContent = item.ativo;
-                    row.appendChild(ativoCell);
+                    var ativoRow = document.createElement('td');
+                    ativoRow.textContent = item.ativo;
+                    row.appendChild(ativoRow);
 
                     tbody.appendChild(row);
                 }
