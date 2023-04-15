@@ -36,6 +36,7 @@ export default {
 
             return res.status(200).send(cad_pessoas);
         } catch (error) {
+            console.error('Erro no banco de dados', error);
             return res.status(500).json({ sucesso: false, mensagem: 'Nenhuma pessoa encontrado!' });
         }
     },
@@ -53,6 +54,7 @@ export default {
                 return res.status(200).json({ sucesso: true, mensagem: `Pessoa: ${nome} removido com sucesso!` });
             }
         } catch (error) {
+            console.error('Erro no banco de dados', error);
             return res.status(500).json({ sucesso: false, mensagem: 'Erro ao remover cadastro de pessoa!' });
         }
     },
@@ -64,7 +66,7 @@ export default {
         try {
             const result = await conexao.client.query('UPDATE cad_pessoas SET nome = $1, email = $2,' +
                 'telefone = $3, data_nascimento = $4, data_cadastro = $5, data_atualizacao = $6, ativo = $7 WHERE idpessoa = $8',
-                [nome, email, idempresa, telefone, data_nascimento, data_cadastro, data_atualizacao, ativo]);
+                [nome, email, idempresa, telefone, data_nascimento, data_cadastro, data_atualizacao, ativo, idpessoa]);
             
             if (result.rowCount == 0) {
                 return res.status(404).json({ sucesso: false, mensagem: 'Nenhúm usuário encontrado!' });
@@ -72,6 +74,7 @@ export default {
                 return res.status(200).json({ sucesso: true, mensagem: `Cadastro: ${nome} alterado com sucesso!` });
             }
         } catch (error) {
+            console.error('Erro no banco de dados', error);
             return res.status(500).json({ sucesso: false, mensagem: 'Erro ao atualizar cadastro de pessoa!' });
         }
     },
@@ -94,6 +97,7 @@ export default {
 
             return res.status(200).send(cad_empresas);
         } catch (error) {
+            console.error('Erro no banco de dados', error);
             return res.status(500).json({ sucesso: true, mensagem: 'Erro ao buscar empresas cadastradas' });
         }
     },
@@ -126,6 +130,7 @@ export default {
 
             return res.status(200).send(lista_pessoas);
         } catch (error) {
+            console.error('Erro no banco de dados', error);
             return res.status(500).json({ sucesso: false, mensagem: 'Nenhuma pessoa encontrado!' });
         }
     }

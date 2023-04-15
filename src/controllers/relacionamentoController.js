@@ -39,6 +39,7 @@ export default {
 
             return res.status(200).send(lista_relacionamentos);
         } catch (error) {
+            console.error('Erro no banco de dados', error);
             return res.status(500).json({sucesso: false, mensagem:'Nenhum relacionamento encontrado!'});
         }
     },
@@ -56,6 +57,7 @@ export default {
                 return res.status(200).json({sucesso: true, mensagem:`Relacionamento: ${titulo} removido com sucesso!`});
             }
         } catch (error) {
+            console.error('Erro no banco de dados', error);
             return res.status(500).json({sucesso: false, mensagem:'Erro ao remover cadastro de relacionamento!'});
         }
     },
@@ -76,6 +78,7 @@ export default {
                 return res.status(200).json({sucesso: true, mensagem:`Relacionamento: ${titulo} alterado com sucesso!`});
             }
         } catch (error) {
+            console.error('Erro no banco de dados', error);
             return res.status(500).json({sucesso: false, mensagem:'Erro ao atualizar cadastro de relacionamento!'});
         }
     },
@@ -99,7 +102,8 @@ export default {
 
             return res.status(200).send(tipo_relacionamento);
         } catch (error) {
-            
+            console.error('Erro no banco de dados', error);
+            return res.status(500).json({ sucesso: false, mensagem: 'Erro ao buscar tipo de relacionamento' });
         }
     },
 
@@ -122,7 +126,8 @@ export default {
 
             return res.status(200).send(status_relacionamento);
         } catch (error) {
-            
+            console.error('Erro no banco de dados', error);
+            return res.status(500).json({ sucesso: false, mensagem: 'Erro ao buscar tipo de staus de relacionamento' });
         }
     }
 }
