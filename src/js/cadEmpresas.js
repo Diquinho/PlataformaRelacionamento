@@ -41,7 +41,7 @@ function cadastraEmpresa() {
         response.json().then(data => {
             if (data.sucesso) {
                 // Se o cadastro for realizado com sucesso, ele retorna para a página de listagem
-                window.location.href = '/lista_pessoas.html';
+                window.location.href = 'http://localhost:3333/lista/empresas';
             } else {
                 // Cadastro falhou, enviando mensagem de erro
                 alert(data.mensagem);

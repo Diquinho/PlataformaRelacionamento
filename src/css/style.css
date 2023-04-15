@@ -1,32 +1,12 @@
 body{
-    background-color: rgb(37, 33, 97);
+    background-color: rgb(255, 255, 255);
     font-family: Arial, Helvetica, sans-serif;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 /* ================ PAGINA DE LOGIN =====================*/
 
-#container-login #btn-login {
-    
-}
 
-#label_login {
-    text-align: left;
-}
-
-#container-login {
-    width: 400px;
-    margin-top: 200px;
-    padding: 20px;
-    width: 50%;
-    max-width: 400px;
-    min-width: 300px;
-    background-color: #232c4d;
-    border-radius: 20px;
-    box-shadow: 1px 4rem 3rem rgba(0, 0, 0, 0.18);
-    position: relative;
-    z-index: 1;
-}
 
 /* =============== LISTAGEM DE DADOS ================== */
 
@@ -36,12 +16,16 @@ body{
     padding: 20px;
     width: 100%;
     max-width: 1500px;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     min-width: 300px;
-    background-color:#232c4d;
+    background-color:#e5e7ee;
     border-radius: 20px;
-    box-shadow: 1px 4rem 3rem rgba(0, 0, 0, 0.18);
+    box-shadow: 1px 4rem 3rem rgba(61, 59, 59, 0.18);
     position: relative;
     z-index: 1;
     
+}
+
+#botao_novo {
+    margin-right: 20px;
 }

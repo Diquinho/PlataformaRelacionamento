@@ -1,0 +1,29 @@
+body{
+    background-color: rgb(37, 33, 97);
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+/* ================ PAGINA DE LOGIN =====================*/
+
+#container-login #btn-login {
+    
+}
+
+#label_login {
+    text-align: left;
+}
+
+#container-login {
+    width: 400px;
+    margin-top: 200px;
+    padding: 20px;
+    width: 50%;
+    max-width: 400px;
+    min-width: 300px;
+    background-color: #232c4d;
+    border-radius: 20px;
+    box-shadow: 1px 4rem 3rem rgba(0, 0, 0, 0.18);
+    position: relative;
+    z-index: 1;
+}

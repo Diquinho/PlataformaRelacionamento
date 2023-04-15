@@ -65,12 +65,12 @@ export default {
 
     async alterar(req, res, next) {
         const { idempresa } = req.params;
-        const { razao_social, idpessoa_responsavel, idtipo_empresa, data_cadastro, tipo, ativo } = req.body;
+        const { razao_social, nome_fantasia, cnpj, idtipo_empresa, data_cadastro, ativo } = req.body;
 
         try {
-            const result = await conexao.client.query('UPDATE cad_empresas SET razao_social = $1, idpessoa_responsavel = $2,' +
-            'idtipo_empresa = $3, data_cadastro = $4, tipo = $5, ativo = $6 WHERE idempresa = $7',
-                [razao_social, idpessoa_responsavel, idtipo_empresa, data_cadastro, tipo, ativo, idempresa]);
+            const result = await conexao.client.query('UPDATE cad_empresas SET razao_social = $1, nome_fantasia = $2,' +
+            'cnpj = $3, idtipo_empresa = $4, data_cadastro = $5, ativo = $6 WHERE idempresa = $7',
+                [razao_social, nome_fantasia, cnpj, idtipo_empresa, data_cadastro, ativo]);
             
             if (result.rowCount == 0) {
                 return res.status(404).json({ sucesso: false, mensagem: 'Nenhuma empresa encontrada!' });

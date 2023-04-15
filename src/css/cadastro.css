@@ -1,0 +1,33 @@
+body{
+    background-color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(0, 0, 0);
+}
+
+/* ================ PAGINA DE LOGIN =====================*/
+
+
+
+/* =============== LISTAGEM DE DADOS ================== */
+
+#form-geral {
+    width: 400px;
+    margin-top: 60px;
+    margin-left: 100px;
+    padding: 30px;
+    width: 100%;
+    max-width: 1300px;
+    color: rgb(0, 0, 0);
+    min-width: 300px;
+    background-color:#e5e7ee;
+    border-radius: 20px;
+    box-shadow: 1px 4rem 3rem rgba(61, 59, 59, 0.18);
+    position: relative;
+    z-index: 1;
+    
+}
+
+
+#botao_novo {
+    margin-right: 20px;
+}
