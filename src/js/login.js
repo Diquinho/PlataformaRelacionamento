@@ -35,7 +35,7 @@ function fazerLogin() {
         response.json().then(data => {
             if (data.sucesso) {
                 // Login realizado com sucesso, redirecionando para uma outra página.
-                window.location.href = '/logado.html';
+                window.location.href = 'http://localhost:3333/index';
             } else {
                 // Login falhou, enviando mensagem de erro
                 alert(data.mensagem);

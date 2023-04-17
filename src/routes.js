@@ -45,6 +45,11 @@ routes.get('/lista/relacionamento', (req, res) => {
     res.sendFile(loginPath);
 });
 
+routes.get('/index', (req, res) => {
+    const loginPath = path.resolve(__dirname, '..', 'src', 'pages', 'index.html');
+    res.sendFile(loginPath);
+});
+
 // ROTA ONDE É CHAMADO MEU SCRIPT.JS
 routes.get('/login/script', (req, res) => {
     const loginPath = path.resolve(__dirname, '..', 'src', 'pages', 'script.js');
