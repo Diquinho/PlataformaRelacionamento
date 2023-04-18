@@ -29,3 +29,14 @@ body{
 #botao_novo {
     margin-right: 20px;
 }
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    height: 60px; 
+    padding: 20px;
+    text-align: center;
+    padding-bottom: 60px;
+}
