@@ -5,6 +5,7 @@ import usuariosController from "./controllers/usuariosController";
 import pessoasController from "./controllers/pessoasController";
 import empresasController from "./controllers/empresasController";
 import relacionamentoController from "./controllers/relacionamentoController";
+import indexController from "./controllers/indexController";
 const path = require('path');
 
 //==================================== ROTA DE PÁGINAS HTML ========================================
@@ -72,6 +73,18 @@ routes.post('/cadastro/empresas', empresasController.create);
 
 //ROTA PARA BUSCAR TIPOS DE EMPRESA
 routes.get('/cadastro/tipo/empresa', empresasController.consultaTipoEmpresa);
+
+// ROTA PARA BUSCAR RELACIONAMENTO INDEX - ÓTIMO
+routes.get('/index/relacionamento/bom', indexController.consultaRelacionamentoBom);
+
+// ROTA PARA BUSCAR RELACIONAMENTO INDEX - REGULAR
+routes.get('/index/relacionamento/regular', indexController.consultaRelacionamentoRegular);
+
+// ROTA PARA BUSCAR RELACIONAMENTO INDEX - RUIM
+routes.get('/index/relacionamento/ruim', indexController.consultaRelacionamentoRuim);
+
+// ROTA PARA BUSCAR RELACIONAMENTO INDEX - RUIM
+routes.get('/index/relacionamento/semretorno', indexController.consultaRelacionamentoSemRetorno);
 
 // ROTA PARA BUSCAR CADASTRO DE EMPRESAS
 routes.get('/cadastro/pessoas/empresa', pessoasController.consultaEmpresa);

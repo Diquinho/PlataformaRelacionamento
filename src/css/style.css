@@ -23,7 +23,8 @@ body{
     box-shadow: 1px 4rem 3rem rgba(61, 59, 59, 0.18);
     position: relative;
     z-index: 1;
-    
+    height: calc(100vh - 200px);
+    overflow-y: scroll;
 }
 
 #botao_novo {

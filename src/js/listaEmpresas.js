@@ -41,7 +41,7 @@ function lista_empresas() {
 
 
 function altera_empresa(idempresa) {
-    //const idtipo_empresa = document.getElementById('idtipo_empresa').value;
+    console.log("chegamos na função, id: ", idempresa);
 
     const requestOptions = {
         method: 'GET',
@@ -56,20 +56,22 @@ function altera_empresa(idempresa) {
     return new Promise(function (resolve, reject) {
         fetch('http://localhost:3333/empresas/' + idempresa, requestOptions).then(async function (response) {
             if (response.status == 200) {
-                document.getElementById("razao_social").value = response.razao_social
-                document.getElementById('nome_fantasia').value = response.nome_fantasia;
-                document.getElementById('cnpj').value = response.cnpj;
-                document.getElementById('tipo-empresa').value = response.tipo-empresa;
-                const retorno = await response.json();
-                resolve(retorno);
+                const data = await response.json(); // converte a resposta em JSON
+                document.getElementById("razao_social").value = data.razao_social;
+                document.getElementById('nome_fantasia').value = data.nome_fantasia;
+                document.getElementById('cnpj').value = data.cnpj;
+                document.getElementById('tipo-empresa').value = data.tipo_empresa;
+                resolve(data);
             } else if (response.status == 401) {
                 alert('Erro ao trazer listagem de empresas!')
             } else {
                 reject({
-                    status: this.status,
-                    statusText: this.statusText
+                status: this.status,
+                statusText: this.statusText
                 });
             }
         })
     });
 }
+
+  

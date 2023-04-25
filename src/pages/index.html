@@ -64,18 +64,212 @@
         </div>
       </nav><br><br><br>
 
+<!-- TABELAS TRAZENDO DADOS -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <table class="table" id="table1">
+            <h3>Ótimo</h3>
+            <thead>
+              <tr>
+                <th scope="col">Ticket</th>
+                <th scope="col">Empresa</th>
+                <th scope="col">Situação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="num_relacionamento_t1"></td>
+                <td id="nome_empresa_t1"></td>
+                <td id="descricao_t1"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-md-6">
+          <table class="table" id="table2">
+            <h3>Regular</h3>
+            <thead>
+              <tr>
+                <th scope="col">Ticket</th>
+                <th scope="col">Empresa</th>
+                <th scope="col">Situação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="num_relacionamento_t2"></td>
+                <td id="nome_empresa_t2"></td>
+                <td id="descricao_t2"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div><br><br>
 
 
+      <div class="row">
+        <div class="col-md-6">
+          <table class="table" id="table3">
+            <h3>Ruim</h3>
+            <thead>
+              <tr>
+                <th scope="col">Ticket</th>
+                <th scope="col">Empresa</th>
+                <th scope="col">Situação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="num_relacionamento_t3"></td>
+                <td id="nome_empresa_t3"></td>
+                <td id="descricao_t3"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-md-6">
+          <table class="table" id="table4">
+            <h3>Sem retorno</h3>
+            <thead>
+              <tr>
+                <th scope="col">Ticket</th>
+                <th scope="col">Empresa</th>
+                <th scope="col">Situação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="num_relacionamento_t4"></td>
+                <td id="nome_empresa_t4"></td>
+                <td id="descricao_t4"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
 
 
       <footer class="footer d-flex mt-auto py-3 bg-body-tertiary bg-dark" id="footer">
         <div class="container">
-            <p>Este é um rodapé fixo.</p>
+          <p>Plataforma Relacionamento</p>
         </div>
     </footer>
-
-        
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="../js/index.js"></script>
+
+    <script>
+      window.onload = function() {
+          buscaRelacionamentoBom().then(function(retorno){
+              console.log('Primeiro objeto: ', retorno)
+              var tbody1 = document.querySelector('#table1 tbody');
+
+              for(var item of retorno){
+                  var row = document.createElement('tr');
+
+                  var num_relacionamentoRow = document.createElement('td');
+                  num_relacionamentoRow.id = "num_relacionamento_t1";
+                  num_relacionamentoRow.textContent = item.num_relacionamento_t1;
+                  row.appendChild(num_relacionamentoRow);
+
+                  var nome_empresaRow = document.createElement('td');
+                  nome_empresaRow.id = "nome_empresa_t1";
+                  nome_empresaRow.textContent = item.nome_empresa_t1;
+                  row.appendChild(nome_empresaRow);
+
+                  var descricaoRow = document.createElement('td');
+                  descricaoRow.id = "descricao_t1";
+                  descricaoRow.textContent = item.descricao_t1;
+                  row.appendChild(descricaoRow);
+
+                  tbody1.appendChild(row);
+              }
+          });
+
+          buscaRelacionamentoRegular().then(function(retorno){
+              console.log('Segundo objeto: ', retorno)
+              var tbody2 = document.querySelector('#table2 tbody');
+
+              for(var item of retorno){
+                  var rowT2 = document.createElement('tr');
+
+                  var num_relacionamentoRowT2 = document.createElement('td');
+                  num_relacionamentoRowT2.id = "num_relacionamento_t2";
+                  num_relacionamentoRowT2.textContent = item.num_relacionamento_t2;
+                  rowT2.appendChild(num_relacionamentoRowT2);
+
+                  var nome_empresaRowT2 = document.createElement('td');
+                  nome_empresaRowT2.id = "nome_empresa_t2";
+                  nome_empresaRowT2.textContent = item.nome_empresa_t2;
+                  rowT2.appendChild(nome_empresaRowT2);
+
+                  var descricaoRowT2 = document.createElement('td');
+                  descricaoRowT2.id = "descricao_t2";
+                  descricaoRowT2.textContent = item.descricao_t2;
+                  rowT2.appendChild(descricaoRowT2);
+
+                  tbody2.appendChild(rowT2);
+              }
+          });
+
+          buscaRelacionamentoRuim().then(function(retorno){
+              console.log('Terceiro objeto: ', retorno)
+              var tbody3 = document.querySelector('#table3 tbody');
+
+              for(var item of retorno){
+                  var rowT3 = document.createElement('tr');
+
+                  var num_relacionamentoRowT3 = document.createElement('td');
+                  num_relacionamentoRowT3.id = "num_relacionamento_t3";
+                  num_relacionamentoRowT3.textContent = item.num_relacionamento_t3;
+                  rowT3.appendChild(num_relacionamentoRowT3);
+
+                  var nome_empresaRowT3 = document.createElement('td');
+                  nome_empresaRowT3.id = "nome_empresa_t3";
+                  nome_empresaRowT3.textContent = item.nome_empresa_t3;
+                  rowT3.appendChild(nome_empresaRowT3);
+
+                  var descricaoRowT3 = document.createElement('td');
+                  descricaoRowT3.id = "descricao_t3";
+                  descricaoRowT3.textContent = item.descricao_t3;
+                  rowT3.appendChild(descricaoRowT3);
+
+                  tbody3.appendChild(rowT3);
+              }
+          });
+
+          buscaRelacionamentoSemRetorno().then(function(retorno){
+              console.log('Quarto objeto: ', retorno)
+              var tbody4 = document.querySelector('#table4 tbody');
+
+              for(var item of retorno){
+                  var rowT4 = document.createElement('tr');
+
+                  var num_relacionamentoRowT4 = document.createElement('td');
+                  num_relacionamentoRowT4.id = "num_relacionamento_t4";
+                  num_relacionamentoRowT4.textContent = item.num_relacionamento_t4;
+                  rowT4.appendChild(num_relacionamentoRowT4);
+
+                  var nome_empresaRowT4 = document.createElement('td');
+                  nome_empresaRowT4.id = "nome_empresa_t4";
+                  nome_empresaRowT4.textContent = item.nome_empresa_t4;
+                  rowT4.appendChild(nome_empresaRowT4);
+
+                  var descricaoRowT4 = document.createElement('td');
+                  descricaoRowT4.id = "descricao_t4";
+                  descricaoRowT4.textContent = item.descricao_t4;
+                  rowT4.appendChild(descricaoRowT4);
+
+                  tbody4.appendChild(rowT4);
+              }
+          });
+      }
+  </script>
    
 </body>
 </html>

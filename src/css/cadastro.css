@@ -11,8 +11,7 @@ body{
 /* =============== LISTAGEM DE DADOS ================== */
 
 #form-geral {
-    width: 400px;
-    margin-top: 60px;
+    margin-top: 40px;
     margin-left: 100px;
     padding: 30px;
     width: 100%;
@@ -24,6 +23,8 @@ body{
     box-shadow: 1px 4rem 3rem rgba(61, 59, 59, 0.18);
     position: relative;
     z-index: 1;
+    height: calc(100vh - 200px);
+    overflow-y: scroll;
     
 }
 
@@ -42,4 +43,8 @@ footer {
     padding: 20px;
     text-align: center;
     padding-bottom: 60px;
+}
+
+h3 {
+    font-weight: bold;
 }

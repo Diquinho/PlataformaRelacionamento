@@ -20,7 +20,7 @@ export default {
 
     async consultar(req, res) {
         try {
-            const result = await conexao.client.query('SELECT ce.cnpj, ce.razao_social, ce.nome_fantasia, te.descricao, ce.data_cadastro, ' +
+            const result = await conexao.client.query('SELECT ce.idempresa, ce.cnpj, ce.razao_social, ce.nome_fantasia, te.descricao, ce.data_cadastro, ' +
             'ce.ativo FROM cad_empresas as ce left join tipo_empresas as te on ce.idtipo_empresa = te.idtipo_empresa ' +
                 'where ce.ativo = true;');
 
@@ -67,6 +67,7 @@ export default {
 
     async alterar(req, res, next) {
         const { idempresa } = req.params;
+        console.log(idempresa);
         const { razao_social, nome_fantasia, cnpj, idtipo_empresa, data_cadastro, ativo } = req.body;
 
         try {
