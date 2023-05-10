@@ -113,15 +113,18 @@ export default {
             let lista_pessoas = [];
 
             result.rows.forEach((row) => {
+                let data_cadastro = new Date(row.data_cadastro).toLocaleDateString();
+                let data_nascimento = new Date(row.data_nascimento).toLocaleDateString();
+                let data_atualizacao = new Date(row.data_atualizacao).toLocaleDateString();
                 let listaPessoas = {
                     idpessoa: row.idpessoa,
                     nome: row.nome,
                     email: row.email,
                     nome_empresa: row.nome_empresa,
-                    telefone: row.telefone,
-                    data_nascimento: row.data_nascimento,
-                    data_cadastro: row.data_cadastro,
-                    data_atualizacao: row.data_atualizacao,
+                    telefone: row.telefone.replace(/^(\d{2})(\d{4,5})(\d{4})$/, "($1) $2-$3"),
+                    data_nascimento: data_nascimento,
+                    data_cadastro: data_cadastro,
+                    data_atualizacao: data_atualizacao,
                     ativo: row.ativo
                 };
                 lista_pessoas.push(listaPessoas);

@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../css/listas.css" type="text/css">
-
-    <title>Lista Cadastros de Relacionamentos</title>
+    <link rel="stylesheet" href="../css/cadastro.css" type="text/css">
+    <title>Formulário - Empresas</title>
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Relacionamentos</a>
+          <a class="navbar-brand" href="#">Cadastro de Empresas</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -65,77 +64,44 @@
         </div>
       </nav><br><br><br>
 
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a href="http://localhost:3333/relacionamentos" type="button" id="botao_novo" class="btn btn-outline-primary">Novo</a>
-      </div>
-    
-    <div class="container" id="div-lista-dados">
-      <table class="table">  
-        <thead class="table-dark">
-            <tr>
-                <th scope="col">Titulo</th>
-                <th scope="col">Empresas</th>
-                <th scope="col">Tipo Relacionamento</th>
-                <th scope="col">Data</th>
-                <th scope="col">Status</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td id="titulo"></td>
-                <td id="idempresa"></td>
-                <td id="idtipo_relacionamento"></td>
-                <td id="data_relacionamento"></td>
-                <td id="idstatus"></td>
-            </tr>
-            
-            </tbody>
-        </table>
-    </div>
+        <form action="/cadastro/empresas" method="post" id="form-geral">
 
-    <footer class="footer d-flex mt-auto py-3 bg-body-tertiary bg-dark" id="footer">
-      <div class="container">
-        <p>Plataforma Relacionamento</p>
-      </div>
-  </footer>
+            <label for="label_form_pessoas" class="form-label mr-2">Razão Social:</label>
+            <input type="text" id="razao_social" class="form-control" name="razao_social"><br>
 
+            <label for="label_form_pessoas" class="form-label">Nome Fantasia:</label>
+            <input type="text" id="nome_fantasia" class="form-control" name="nome_fantasia"><br>
+
+            <label for="label_form_pessoas" class="form-label">CNPJ:</label>
+            <input type="number" id="cnpj" class="form-control" name="cnpj"><br>
+
+            <label for="label_form_pessoas" class="form-label">Tipos de empresa</label>
+            <select class="form-select" id="tipo-empresa" name="idtipo_empresa"></select><br>
+
+            <input type="button" class="btn btn-outline-primary" id="btn-cadastra-empresa" value="Salvar">
+            <a href="http://localhost:3333/lista/empresas" type="button"class="btn btn-outline-secondary" id="btn-voltar" value="Cancelar">Cancelar</a>
+        </form><br><br>
+
+
+        <footer class="footer d-flex mt-auto py-3 bg-body-tertiary bg-dark" id="footer">
+          <div class="container">
+              <p>Plataforma Relacionamento</p>
+          </div>
+      </footer>
+
+    <script src="../js/cadEmpresas.js"></script>
+    <script src="../controllers/empresasController.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="../js/listaRelacionamento.js"></script>
-
     <script>
         window.onload = function() {
-            lista_relacionamentos().then(function(retorno){
-                console.log('Objeto JSON: ', retorno)
-                var tbody = document.querySelector('tbody');
-
-                for(var item of retorno){
-                    var row = document.createElement('tr');
-
-                    var tituloRow = document.createElement('td');
-                    tituloRow.textContent = item.titulo;
-                    row.appendChild(tituloRow);
-
-                    var empresaRow = document.createElement('td');
-                    empresaRow.textContent = item.nome_empresa;
-                    row.appendChild(empresaRow);
-
-                    var tipo_relacionamentoRow = document.createElement('td');
-                    tipo_relacionamentoRow.textContent = item.descricao_tipo;
-                    row.appendChild(tipo_relacionamentoRow);
-
-                    var dataRow = document.createElement('td');
-                    dataRow.textContent = item.data_relacionamento;
-                    row.appendChild(dataRow);
-
-                    var statusRow = document.createElement('td');
-                    statusRow.textContent = item.descricao_status;
-                    row.appendChild(statusRow);
-
-                    tbody.appendChild(row);
-                }
-            });
+            buscaTipoEmpresa().then(function(retorno){
+                    document.querySelector('#tipo-empresa').innerHTML = ""
+                    for(var item of retorno){
+                        document.querySelector("#tipo-empresa").innerHTML += "<option value='"+item.idtipo_empresa+"'>"+item.descricao+"</option>"
+                    }
+                });
         }
     </script>
- 
+   
 </body>
 </html>

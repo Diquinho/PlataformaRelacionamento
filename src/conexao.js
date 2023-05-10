@@ -5,7 +5,7 @@ class Conexao {
     // Conexão com o banco de dados
         this.client = new Client({
             user: 'postgres',
-            host: '20.224.117.181',
+            host: '13.81.68.171',
             database: 'teste',
             password: 'andre123',
             port: 5432,

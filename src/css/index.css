@@ -10,19 +10,21 @@ body{
 
 /* =============== LISTAGEM DE DADOS ================== */
 
-#div-lista-dados table {
-    width: 400px;
-    margin-top: 50px;
-    padding: 20px;
+#form-geral {
+    margin-top: 40px;
+    margin-left: 100px;
+    padding: 30px;
     width: 100%;
-    max-width: 1500px;
+    max-width: 1300px;
     color: rgb(0, 0, 0);
     min-width: 300px;
-    /* background-color:#e5e7ee; */
+    background-color:#e5e7ee;
     border-radius: 20px;
     box-shadow: 1px 4rem 3rem rgba(61, 59, 59, 0.18);
     position: relative;
     z-index: 1;
+    height: calc(100vh - 200px);
+    overflow-y: scroll;
     
 }
 
@@ -30,6 +32,7 @@ body{
 #botao_novo {
     margin-right: 20px;
 }
+
 
 footer {
     position: fixed;
@@ -39,6 +42,9 @@ footer {
     height: 60px; 
     padding: 20px;
     text-align: center;
+    padding-bottom: 60px;
 }
 
-
+h5 {
+    font-weight: bold;
+}

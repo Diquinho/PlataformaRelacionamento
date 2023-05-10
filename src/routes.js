@@ -56,6 +56,11 @@ routes.get('/login/script', (req, res) => {
     const loginPath = path.resolve(__dirname, '..', 'src', 'pages', 'script.js');
     res.sendFile(loginPath);
 });
+
+routes.get('/empresas/alterar', (req, res) => {
+    const loginPath = path.resolve(__dirname, '..', 'src', 'pages', 'editarEmpresas.html');
+    res.sendFile(loginPath);
+});
   
 
 //==================================== ROTA DE API RESTFULL ========================================

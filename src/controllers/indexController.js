@@ -5,9 +5,10 @@ export default {
 
         try {
             const result = await conexao.client.query('select r.num_relacionamento, coalesce(ce.razao_social, ce.nome_fantasia) as nome_empresa,' +
-            'sr.descricao from relacionamentos as r inner join cad_empresas as ce on r.idempresa = ce.idempresa ' +
+            'tr.descricao from relacionamentos as r inner join cad_empresas as ce on r.idempresa = ce.idempresa ' +
             'inner join status_relacionamento as sr on r.idstatus = sr.idstatus ' +
-            'where r.idstatus = 1 order by r.data_relacionamento desc limit 5');
+            'inner join tipo_relacionamento as tr on tr.idtipo_relacionamento = r.idtipo_relacionamento ' +     
+            'where r.idstatus = 1 order by r.data_relacionamento desc limit 4');
             
                 let lista_relacionamento_bom = [];
 
@@ -33,9 +34,10 @@ export default {
 
         try {
             const result = await conexao.client.query('select r.num_relacionamento, coalesce(ce.razao_social, ce.nome_fantasia) as nome_empresa,' +
-            'sr.descricao from relacionamentos as r inner join cad_empresas as ce on r.idempresa = ce.idempresa ' +
+            'tr.descricao from relacionamentos as r inner join cad_empresas as ce on r.idempresa = ce.idempresa ' +
             'inner join status_relacionamento as sr on r.idstatus = sr.idstatus ' +
-            'where r.idstatus = 2 order by r.data_relacionamento desc limit 5');
+            'inner join tipo_relacionamento as tr on tr.idtipo_relacionamento = r.idtipo_relacionamento ' +
+            'where r.idstatus = 2 order by r.data_relacionamento desc limit 4');
             
                 let lista_relacionamento_regular = [];
 
@@ -61,9 +63,10 @@ export default {
 
         try {
             const result = await conexao.client.query('select r.num_relacionamento, coalesce(ce.razao_social, ce.nome_fantasia) as nome_empresa,' +
-            'sr.descricao from relacionamentos as r inner join cad_empresas as ce on r.idempresa = ce.idempresa ' +
+            'tr.descricao from relacionamentos as r inner join cad_empresas as ce on r.idempresa = ce.idempresa ' +
             'inner join status_relacionamento as sr on r.idstatus = sr.idstatus ' +
-            'where r.idstatus = 3 order by r.data_relacionamento desc limit 5');
+            'inner join tipo_relacionamento as tr on tr.idtipo_relacionamento = r.idtipo_relacionamento ' +
+            'where r.idstatus = 3 order by r.data_relacionamento desc limit 4');
             
                 let lista_relacionamento_ruim = [];
 
@@ -89,9 +92,10 @@ export default {
 
         try {
             const result = await conexao.client.query('select r.num_relacionamento, coalesce(ce.razao_social, ce.nome_fantasia) as nome_empresa,' +
-            'sr.descricao from relacionamentos as r inner join cad_empresas as ce on r.idempresa = ce.idempresa ' +
+            'tr.descricao from relacionamentos as r inner join cad_empresas as ce on r.idempresa = ce.idempresa ' +
             'inner join status_relacionamento as sr on r.idstatus = sr.idstatus ' +
-            'where r.idstatus = 4 order by r.data_relacionamento desc limit 5');
+            'inner join tipo_relacionamento as tr on tr.idtipo_relacionamento = r.idtipo_relacionamento ' +
+            'where r.idstatus = 4 order by r.data_relacionamento desc limit 4');
             
                 let lista_relacionamento_sem_retorno = [];
 

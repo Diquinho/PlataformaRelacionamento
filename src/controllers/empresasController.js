@@ -27,13 +27,14 @@ export default {
             let lista_empresas = [];
 
             result.rows.forEach((row) => {
+                let data_cadastro = new Date(row.data_cadastro).toLocaleDateString();
                 let listaEmpresa = {
                     idempresa: row.idempresa,
                     razao_social: row.razao_social,
                     nome_fantasia: row.nome_fantasia,
                     cnpj: row.cnpj,
                     descricao: row.descricao,
-                    data_cadastro: row.data_cadastro,
+                    data_cadastro: data_cadastro,
                     ativo: row.ativo
                 };
                 lista_empresas.push(listaEmpresa);
@@ -65,7 +66,8 @@ export default {
         }
     },
 
-    async alterar(req, res, next) {
+    async alterar(req, res) {
+        console.log('cheguei no controller');
         const { idempresa } = req.params;
         console.log(idempresa);
         const { razao_social, nome_fantasia, cnpj, idtipo_empresa, data_cadastro, ativo } = req.body;

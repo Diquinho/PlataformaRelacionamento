@@ -19,19 +19,20 @@ export default {
     async consultar(req, res) {
         try {
             const result = await conexao.client.query('SELECT r.titulo, coalesce(ce.razao_social, ce.nome_fantasia) as nome_empresa, ' +
-                'tr.descricao,r.data_relacionamento, sr.descricao FROM relacionamentos as r left join cad_empresas as ce on r.idempresa = ce.idempresa ' +
+                'tr.descricao as descricao_tipo,r.data_relacionamento, sr.descricao as descricao_status FROM relacionamentos as r left join cad_empresas as ce on r.idempresa = ce.idempresa ' +
                 'left join tipo_relacionamento as tr on r.idtipo_relacionamento = tr.idtipo_relacionamento ' +
-                'left join status_relacionamento as sr on sr.idstatus = r.idstatus;');
+                'left join status_relacionamento as sr on sr.idstatus = r.idstatus limit 10;');
 
             let lista_relacionamentos = [];
 
             result.rows.forEach((row) => {
+                let data_relacionamento = new Date(row.data_relacionamento).toLocaleDateString();
                 let listaRelacionamento = {
                     titulo: row.titulo,
                     nome_empresa: row.nome_empresa,
-                    descricao: row.descricao,
-                    data_relacionamento: row.data_relacionamento,
-                    idstatus: row.idstatus,
+                    descricao_tipo: row.descricao_tipo,
+                    data_relacionamento: data_relacionamento,
+                    descricao_status: row.descricao_status,
                 };
                 lista_relacionamentos.push(listaRelacionamento);
                 console.log(listaRelacionamento);
