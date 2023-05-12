@@ -78,6 +78,7 @@
                 <th scope="col">Tipo Relacionamento</th>
                 <th scope="col">Data</th>
                 <th scope="col">Status</th>
+                <th scope="col">Editar</th>
             </tr>
             </thead>
             <tbody>
@@ -130,6 +131,20 @@
                     var statusRow = document.createElement('td');
                     statusRow.textContent = item.descricao_status;
                     row.appendChild(statusRow);
+
+                    // BOTÃO DE ALTERAR, VERIFICAR COMO FAZER
+                    var editarRow = document.createElement('td');
+                    var editarButton = document.createElement('button');
+                    var editarIcon = document.createElement('i');
+                    editarIcon.classList.add('bi', 'bi-pencil-square');
+                    editarButton.appendChild(editarIcon);
+
+                    // editarButton.setAttribute('onclick', `editarEmpresas(item.idempresa})`)
+                    editarButton.addEventListener('click', function() {
+                        editarEmpresa(item.idempresa);
+                    });
+                    editarRow.appendChild(editarButton);
+                    row.appendChild(editarRow);
 
                     tbody.appendChild(row);
                 }

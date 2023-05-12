@@ -80,9 +80,8 @@
                 <th scope="col">Telefone</th>
                 <th scope="col">Data Nascimento</th>
                 <th scope="col">Data Cadastro</th>
-                <!-- <th scope="col">Data Atualização</th> -->
                 <th scope="col">Ativo</th>
-                <th>Editar</th>
+                <th scope="col">Editar</th>
             </tr>
             </thead>
             <tbody>
@@ -146,6 +145,20 @@
                     var ativoRow = document.createElement('td');
                     ativoRow.textContent = item.ativo;
                     row.appendChild(ativoRow);
+
+                    // BOTÃO DE ALTERAR, VERIFICAR COMO FAZER
+                    var editarRow = document.createElement('td');
+                    var editarButton = document.createElement('button');
+                    var editarIcon = document.createElement('i');
+                    editarIcon.classList.add('bi', 'bi-pencil-square');
+                    editarButton.appendChild(editarIcon);
+
+                    // editarButton.setAttribute('onclick', `editarEmpresas(item.idempresa})`)
+                    editarButton.addEventListener('click', function() {
+                        editarEmpresa(item.idempresa);
+                    });
+                    editarRow.appendChild(editarButton);
+                    row.appendChild(editarRow);
 
                     tbody.appendChild(row);
                 }
