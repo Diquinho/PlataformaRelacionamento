@@ -13,11 +13,6 @@ function cadastraEmpresa() {
     const nome_fantasia = document.getElementById('nome_fantasia').value;
     const cnpj = document.getElementById('cnpj').value;
     const idtipo_empresa = document.getElementById('tipo-empresa').value;
-
-    if (!razao_social || !nome_fantasia || !cnpj || !idtipo_empresa) {
-        alert('Preencha todos os campos!');
-        return
-    }
     
     const requestOptions = {
         method: 'POST',

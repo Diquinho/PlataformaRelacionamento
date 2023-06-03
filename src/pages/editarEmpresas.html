@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../css/cadastro.css" type="text/css">
+    <!-- <link rel="stylesheet" href="../css/cadastro.css" type="text/css"> -->
     <title>Formulário - Empresas</title>
 </head>
 <body>
@@ -67,18 +67,19 @@
         <form action="/atualizar/empresa" method="post" id="form-geral">
 
             <label for="label_form_pessoas" class="form-label mr-2">Razão Social:</label>
-            <input type="text" id="razao_social" class="form-control" name="razao_social"><br>
+            <input type="text" id="razao_social" class="form-control" name="razao_social" value="<%= empresa.razao_social %>"><br>
 
             <label for="label_form_pessoas" class="form-label">Nome Fantasia:</label>
-            <input type="text" id="nome_fantasia" class="form-control" name="nome_fantasia"><br>
+            <input type="text" id="nome_fantasia" class="form-control" name="nome_fantasia" value="<%= empresa.nome_fantasia %>"><br>
 
             <label for="label_form_pessoas" class="form-label">CNPJ:</label>
-            <input type="number" id="cnpj" class="form-control" name="cnpj"><br>
+            <input type="number" id="cnpj" class="form-control" name="cnpj" value="<%= empresa.cnpj %>"><br>
 
             <label for="label_form_pessoas" class="form-label">Tipos de empresa</label>
-            <select class="form-select" id="tipo-empresa" name="idtipo_empresa"></select><br>
+            <select class="form-select" id="tipo-empresa" value="<%= empresa.idtipo_empresa %>" name="idtipo_empresa"></select><br>
 
-            <input type="button" class="btn btn-outline-primary" id="btn-cadastra-empresa" value="Salvar">
+            <!-- <input type="button" class="btn btn-outline-primary" value="Salvar" onclick="atualizarEmpresa()"> -->
+            <button type="button" class="btn btn-outline-primary" onclick="atualizarEmpresa()">Atualizar</button>
             <a href="http://localhost:3333/lista/empresas" type="button"class="btn btn-outline-secondary" id="btn-voltar" value="Cancelar">Cancelar</a>
         </form><br><br>
 
@@ -89,19 +90,24 @@
           </div>
       </footer>
 
-    <script src="../js/cadEmpresas.js"></script>
-    <script src="../controllers/empresasController.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script>
+      <script src="/js/listaEmpresas.js"></script>
+      <script src="../controllers/empresasController.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+      <script>
         window.onload = function() {
-            buscaTipoEmpresa().then(function(retorno){
-                    document.querySelector('#tipo-empresa').innerHTML = ""
-                    for(var item of retorno){
-                        document.querySelector("#tipo-empresa").innerHTML += "<option value='"+item.idtipo_empresa+"'>"+item.descricao+"</option>"
-                    }
-                });
-        }
-    </script>
+            // Obtenha o valor da empresa passado pelo servidor
+            const empresa = JSON.stringify(empresa);
+
+            // Preencha o valor da razão social no campo
+            document.getElementById('razao_social').value = empresa.razao_social;
+            document.getElementById('nome_fantasia').value = empresa.nome_fantasia;
+            document.getElementById('cnpj').value = empresa.cnpj
+            document.getElementById('idtipo_empresa').value = empresa.idtipo_empresa;
+  };
+      </script>
+    
    
 </body>
 </html>

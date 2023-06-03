@@ -1,4 +1,5 @@
 import conexao from "../conexao";
+const path = require('path');
 
 export default {
     async create(req, res) {
@@ -25,6 +26,7 @@ export default {
                 'where ce.ativo = true;');
 
             let lista_empresas = [];
+            console.log('Montando o objeto json...')
 
             result.rows.forEach((row) => {
                 let data_cadastro = new Date(row.data_cadastro).toLocaleDateString();
@@ -67,21 +69,20 @@ export default {
     },
 
     async alterar(req, res) {
-        console.log('cheguei no controller');
-        const { idempresa } = req.params;
-        console.log(idempresa);
-        const { razao_social, nome_fantasia, cnpj, idtipo_empresa, data_cadastro, ativo } = req.body;
 
         try {
+            const { idempresa, razao_social, nome_fantasia, cnpj, idtipo_empresa, data_cadastro, ativo } = req.body;
+
+            console.log(idempresa);
+            console.log(razao_social);
+            console.log(nome_fantasia);
+
             const result = await conexao.client.query('UPDATE cad_empresas SET razao_social = $1, nome_fantasia = $2, ' +
             'cnpj = $3, idtipo_empresa = $4, data_cadastro = $5, ativo = $6 WHERE idempresa = $7',
                 [razao_social, nome_fantasia, cnpj, idtipo_empresa, data_cadastro, ativo, idempresa]);
             
-            if (result.rowCount == 0) {
-                return res.status(404).json({ sucesso: false, mensagem: 'Nenhuma empresa encontrada!' });
-            } else {
-                return res.status(200).json({sucesso: true, mensagem:`Dados referente a empresa ${razao_social} alterados com sucesso!`});
-            }
+            res.redirect('/lista/empresas');
+            
         } catch (error) {
             console.error('Erro no banco de dados', error);
             return res.status(500).json({sucesso: false, mensagem:'Erro ao atualizar cadastro de empresa!'});
@@ -109,5 +110,27 @@ export default {
             console.error('Erro no banco de dados', error);
             return res.status(500).json({sucesso: true, mensagem:'Erro ao buscar tipos de empresa'});
         }
-    }
+    },
+
+    async editarEmpresa(req, res) {
+        try {
+            const idempresa = req.params.idempresa;
+            console.log("idempresa pego como parametro: " + idempresa);
+            const result = await conexao.client.query('SELECT * FROM cad_empresas WHERE idempresa = ' + idempresa);
+            
+            console.log('Resultado:', result.rows); // Exibe os resultados da consulta
+            console.log('Query:', result.command); // Exibe a query gerada
+
+            if (result.rows.length > 0) {
+                const empresa = result.rows[0];
+                res.render('editarEmpresas', { empresa });
+            } else {
+                res.status(404).json({ message: 'Empresa não encontrada' });
+            }
+
+        } catch (error) {
+            console.error('Erro no banco de dados', error);
+            res.status(500).json({ message: 'Erro ao buscar empresa', error: error.message });
+        }
+    },
 }

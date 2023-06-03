@@ -67,6 +67,10 @@ routes.get('/empresas/alterar', (req, res) => {
 // ROTA PARA REALIZAR LOGIN
 routes.post('/usuarios/login', usuariosController.logar);
 
+// ROTA PARA EDITAR UMA EMPRESA
+routes.get('/empresas/:idempresa/editar', empresasController.editarEmpresa);
+routes.put('/empresas/:idempresa', empresasController.alterar);
+
 // ROTA PARA CADASTRAR UMA NOVA PESSOA
 routes.post('/cadastro/pessoas', pessoasController.create);
 
@@ -128,7 +132,6 @@ routes.put('/pessoas/:idpessoa', pessoasController.alterar);
 routes.post('/empresas', empresasController.create);
 routes.get('/empresas', empresasController.consultar);
 routes.delete('/empresas/:idempresa', empresasController.delete);
-routes.put('/empresas/:idempresa', empresasController.alterar);
 
 //RELACIONAMENTO
 routes.post('/relacionamentos', relacionamentoController.create);

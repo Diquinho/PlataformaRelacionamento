@@ -15,6 +15,9 @@ class App {
         this.server.use('/css', express.static(__dirname + '/css'));
         this.server.use('/js', express.static(__dirname + '/js'));
 
+        this.server.engine('html', require('ejs').renderFile);
+        this.server.set('views', __dirname + '/pages');
+        this.server.set('view engine', 'html');
     }
 
     middlewares() {
